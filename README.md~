@@ -1,0 +1,15 @@
+## parasiteR
+
+> Programmatically access the London Natural History Musuem's helminth database. 
+
+
+### Installation
+
+```r
+# From GitHub
+# install.packages("devtools")
+devtools::install_github("taddallas/parasiteR")
+library("parasiteR")
+```
+
+This is a very recent creation, and will be changed pretty often as I find time to update it. Feel free to fork it and contribute some functionality. 
