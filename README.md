@@ -10,14 +10,14 @@
 ```r
 # From GitHub
 # install.packages("devtools")
-devtools::install_github("taddallas/parasiteR")
+devtools::install_github("rOpenSci/parasiteR")
 library("parasiteR")
 ```
 
 
 ### Main functions
 
-`findHost()`
+#### `findHost()`
 
 Given a host genus and (optionally) species and location, this function returns all host-parasite associations of a given host species. The example below determines all parasite records for helminth infections of _Gorilla gorilla_. 
 
@@ -26,7 +26,7 @@ gorillaParasites=findHost('Gorilla', 'gorilla')
 head(gorillaParasites)
 ```
 
-`findParasite()`
+#### `findParasite()`
 
 Given a helminth parasite genus (and optionally species, and location), this function returns a list of host-parasite records for that parasite. In the example below, I query the database for occurrences of _Giardia lamblia_.
 
@@ -37,7 +37,7 @@ str(giardiaHosts)
 
 
 
-`listLocations()` and `findLocation()`
+#### `listLocations()` and `findLocation()`
 
 List all location names (`listLocations()`). These names can be given to the `findLocation()` function, which finds all host-parasite associations that have occurred in the given location. Below, I look at host-parasite associations recorded in France. 
 
