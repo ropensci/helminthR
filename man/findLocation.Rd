@@ -1,25 +1,19 @@
-\name{findParasite}
-\alias{findParasite}
+\name{findLocation}
+\alias{findLocation}
 
 \title{
-Find host-parasite interactions for a given parasite species.
+Find host-parasite interactions for a given location
 }
 \description{
-Given a host genus and/or species, this function returns a matrix containing host-parasite interaction data.
+Given a location (available from `listLocations()`) this function returns all host-parasite associations in that location. 
 }
 
 \usage{
-findParasite(genus, species, location = "")
+findLocation(location = "")
 }
 
 
 \arguments{
-  \item{genus}{
-Parasite genus
-}
-  \item{species}{
-Parasite species
-}
   \item{location}{
 Location of host-parasite interaction. 
 }
@@ -46,7 +40,6 @@ Tad Dallas
 
 \examples{
 
-giardiaHosts=findParasite(genus='Giardia', species='lamblia')
-str(giardiaHosts)
-
+FrenchHostPars=findLocation(location='France')
+dim(FrenchHostPars)
 }

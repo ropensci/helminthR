@@ -29,7 +29,7 @@ Geographic location.
 }
 
 \value{
-Two column matrix containing host species and parasite species, with each row corresponding to an occurrence of a parasite species on a host species.
+Three column matrix containing host species, and parasite species (shortened name and full name), with each row corresponding to an occurrence of a parasite species on a host species.
 }
 
 \references{
@@ -47,6 +47,6 @@ Tad Dallas
 
 \examples{
 gorillaParasites=findHost('Gorilla', 'gorilla')
-str(gorillaParasites)
+head(gorillaParasites)
 }
 

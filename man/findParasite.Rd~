@@ -1,72 +1,52 @@
 \name{findParasite}
 \alias{findParasite}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-%%  ~~function to do ... ~~
+Find host-parasite interactions for a given parasite species.
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Given a host genus and/or species, this function returns a matrix containing host-parasite interaction data.
 }
+
 \usage{
 findParasite(genus, species, location = "")
 }
-%- maybe also 'usage' for other objects documented here.
+
+
 \arguments{
   \item{genus}{
-%%     ~~Describe \code{genus} here~~
+Parasite genus
 }
   \item{species}{
-%%     ~~Describe \code{species} here~~
+Parasite species
 }
   \item{location}{
-%%     ~~Describe \code{location} here~~
+Location of host-parasite interaction. 
 }
 }
+
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+Use the `listLocations()` function for a list of possible locations.
 }
+
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+Two column matrix containing host species and parasite species, with each row corresponding to an occurrence of a parasite species on a host species.
 }
 \references{
-%% ~put references to the literature/web site here ~
+Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005). Host-Parasite Database of the Natural History Museum, London. URL.
 }
 \author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+Tad Dallas
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+ \code{\link{findHost}}
 }
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (genus, species, location = "") 
-{
-    hpUrl = html(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?paragroup=&fmsubgroup=Starts+with&subgroup=&fmparagenus=Contains&paragenus=", 
-        genus, "&fmparaspecies=Contains&paraspecies=", species, 
-        "&fmhostgenus=Starts+with&hostgenus=&fmhostspecies=Starts+with&hostspecies=&location=", 
-        location, "&hstate=&pstatus=&showparasites=on&showhosts=on&showrefs=on&groupby=parasite&search=Search", 
-        sep = ""))
-    names <- hpUrl \%>\% html_nodes(".searchlink") \%>\% html_text()
-    hpList = matrix(names, ncol = 2, byrow = TRUE)
-    colnames(hpList) = c("Parasite", "Host")
-    return(hpList)
-  }
+\examples{
+
+giardiaHosts=findParasite(genus='Giardia', species='lamblia')
+str(giardiaHosts)
+
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
