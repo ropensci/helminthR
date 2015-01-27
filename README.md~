@@ -1,6 +1,6 @@
 ## parasiteR
 
-[![Build Status](https://travis-ci.org/ropensci/parasiteR.svg?branch=master)](https://travis-ci.org/ropensci/parasiteR)
+[![Build Status](https://travis-ci.org/taddallas/parasiteR.svg)](https://travis-ci.org/taddallas/parasiteR)
 
 > Programmatically access the London Natural History Museum's [helminth database](http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/index.html). 
 
