@@ -53,3 +53,5 @@ str(FrenchHostPars)
 ### Contribute!
 This is a very recent creation, and will be changed pretty often as I find time to update it. Feel free to fork it and contribute some functionality. 
 
+
+[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
