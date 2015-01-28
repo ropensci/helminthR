@@ -10,4 +10,6 @@ script: ./travis-tool.sh run_tests
 
 after_failure:
   - ./travis-tool.sh dump_logs
-
+notifications:
+  slack:
+    secure: W/SNFeqFQ9Ezth8VqJtWSL+296iqEvzJQ2SrxrfNx66StjNywRUc8Sp/Yw1/kZHwsHu8pb9uO42yxanSly9LZa235kuG3EkB0hzW6md0kQ9o1fGI/GjOLKW49IE9utJ81e6Pg4e1evNTNQgEk5f4UZHLguNnkOGqUm31VrVal4k=
