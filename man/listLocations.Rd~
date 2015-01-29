@@ -13,8 +13,8 @@ listLocations()
 
 
 \value{
-Returns a vector of locations. However, it is important to note that some locations are nested inside of other locations. For instance, you can search for all host-parasite associations in the Great Lakes as a whole, or you can target Lake Ontario specifically. Currently, I don't have a good way of showing nested structure of locations. }
-
+Returns a vector of length 505. Indentation is kept arbitrarily. 
+}
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005). Host-Parasite Database of the Natural History Museum, London. URL.
 }

@@ -1,0 +1,8 @@
+context("findLocation")
+
+test_that("findLocation finds hosts and parasite by location", {
+	expect_error(findLocation("utopia"))
+	France=findLocation("France")
+	expect_more_than(nrow(France), 2)
+})
+	
