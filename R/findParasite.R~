@@ -18,8 +18,8 @@
 #' @examples
 #' 
 #' 
-#' strongHosts=findParasite(genus='Strongyloides')
-#' dim(strongHosts)
+#' giardiaHosts=findParasite(genus='Giardia', species='lamblia')
+#' str(giardiaHosts)
 #' 
 #' 
 findParasite <- function(genus, species = "", location = "") {
