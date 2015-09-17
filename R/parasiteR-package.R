@@ -8,11 +8,10 @@
 #' London Natural History Museum's Host-Parasite database. The package
 #' currently allows you to query by host species, parasite species, and
 #' geographic location. There is no information on prevalence or intensity, but
-#' references are provided, and can be programmatically accessed using the
-#' `getReferences` function.
+#' references are provided using the `citation` function argument.
 #' 
 #' \tabular{ll}{ Package: \tab parasiteR\cr Type: \tab Package\cr Version: \tab
-#' 1.0\cr Date: \tab 2015-01-19\cr License: \tab Creative Commons CC0 1.0
+#' 1.0.1\cr Date: \tab 2015-09-17\cr License: \tab Creative Commons CC0 1.0
 #' Universal (CC-0)\cr }
 #' 
 #' @name parasiteR
