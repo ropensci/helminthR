@@ -4,7 +4,7 @@
 \title{Web scrapes parasite occurrence records from the London Natural History Museum's Host-Parasite database, which contains over a quarter of a million helminth records.
 }
 
-\description{This package uses `rvest` to scrape parasite occurrence records from the London Natural History Museum's Host-Parasite database. The package currently allows you to query by host species, parasite species, and geographic location. There is no information on prevalence or intensity, but references are provided, and can be accessed using the `citation` function argument.
+\description{This package uses `rvest` to scrape parasite occurrence records from the London Natural History Museum's Host-Parasite database. The package currently allows you to query by host species, parasite species, and geographic location. There is no information on prevalence or intensity, but references are provided, and can be accessed by setting the `citation` function argument.
 }
 
 \details{

@@ -9,8 +9,10 @@
 #' @param genus Host genus
 #' @param species Host species
 #' @param location Geographic location.
-#' @return Three column matrix containing host species, and parasite species
-#' (shortened name and full name), with each row corresponding to an occurrence
+#' @param citation Boolean. Should the output include the citation link? default is FALSE
+#' @return Three (or four) column data.frame containing host species, parasite species
+#' (shortened name and full name), and citation link (optional), with each row 
+#' corresponding to an occurrence
 #' of a parasite species on a host species.
 #' @author Tad Dallas
 #' @seealso \code{\link{findParasite}}
@@ -21,7 +23,7 @@
 #' gorillaParasites=findHost('Gorilla', 'gorilla')
 #' head(gorillaParasites)
 #' 
-findHost <- function(genus, species = "", location = "") {
+findHost <- function(genus, species = "", location = "", citation=FALSE) {
     possLocs <- listLocations()
     if (location %in% possLocs == FALSE & location != "") {
         stop("Please choose a location from the possible locations in the listLocations() function")
@@ -51,5 +53,14 @@ findHost <- function(genus, species = "", location = "") {
     names(parNames3) <- NULL
     parNamesShort <- unlist(parNames3)
     ret <- data.frame(Host = hpList[, 2], Parasite = parNamesShort, ParasiteFull = hpList[, 1])
+
+ if(citation){
+      citeLinks <- hpUrl %>% html_nodes("td~ td+ td a") %>% html_attr("href")
+      citations <- paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/", citeLinks, sep='')
+      ret <- data.frame(Host = hpList[, 2], Parasite = parNamesShort, 
+                      ParasiteFull = hpList[, 1], 
+                      Reference = citations)
+    }
+
     return(ret)
 } 

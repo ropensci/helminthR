@@ -22,16 +22,16 @@ library("parasiteR")
 Given a host genus and (optionally) species and location, this function returns all host-parasite associations of a given host species. The example below determines all parasite records for helminth infections of _Gorilla gorilla_. 
 
 ```r
-gorillaParasites=findHost('Gorilla', 'gorilla')
+gorillaParasites <- findHost('Gorilla', 'gorilla')
 head(gorillaParasites)
 ```
 
 #### `findParasite()`
 
-Given a helminth parasite genus (and optionally species, and location), this function returns a list of host-parasite records for that parasite. In the example below, I query the database for occurrences of _Giardia lamblia_.
+Given a helminth parasite genus (and optionally species, and location), this function returns a list of host-parasite records for that parasite. In the example below, I query the database for occurrences of the genus _Strongyloides_.
 
 ```r
-strongHosts=findParasite(genus='Strongyloides')
+strongHosts <- findParasite(genus='Strongyloides')
 str(strongHosts)
 ```
 
@@ -43,7 +43,7 @@ List all location names (`listLocations()`). These names can be given to the `fi
 
 
 ```r
-FrenchHostPars=findLocation(location='France')
+FrenchHostPars <- findLocation(location='France')
 str(FrenchHostPars)
 ```
 
@@ -51,7 +51,11 @@ str(FrenchHostPars)
 
 
 ### Contribute!
-This is a very recent creation, and will be changed pretty often as I find time to update it. Feel free to fork it and contribute some functionality. 
+
+Feel free to fork it and contribute some functionality.  
 
 
 [![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+
+
+

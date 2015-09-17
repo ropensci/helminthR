@@ -9,9 +9,8 @@
 #' @param species Parasite species
 #' @param location Location of host-parasite interaction.
 #' @param citation Boolean. Should the output include the citation link? default is FALSE
-#' @return Three (or four) column data.frame containing host species, parasite species
-#' (shortened name and full name), and citation link (optional), with each row 
-#' corresponding to an occurrence
+#' @return Three column matrix containing host species, and parasite species
+#' (shortened name and full name), with each row corresponding to an occurrence
 #' of a parasite species on a host species.
 #' @author Tad Dallas
 #' @seealso \code{\link{findHost}}
