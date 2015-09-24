@@ -36,7 +36,7 @@ findParasite <- function(genus, species = "", location = "", citation = FALSE) {
         location4 <- gsub(" ", "+", location3)
         location <- location4
     }
-    hpUrl <- htmlParse(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?dbfnsRowsPerPage=500000&x=13&y=5&paragroup=&fmsubgroup=Starts+with&subgroup=&fmparagenus=Starts+with&paragenus=", 
+    hpUrl <- html(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?dbfnsRowsPerPage=500000&x=13&y=5&paragroup=&fmsubgroup=Starts+with&subgroup=&fmparagenus=Starts+with&paragenus=", 
         genus, "&fmparaspecies=Contains&paraspecies=", species, "&fmhostgenus=Starts+with&hostgenus=&fmhostspecies=Starts+with&hostspecies=&location=", location, "&hstate=&pstatus=&showparasites=on&showhosts=on&showrefs=on&groupby=parasite&search=Search", 
         sep = ""))
     names <- hpUrl %>% html_nodes(".searchlink") %>% html_text()
