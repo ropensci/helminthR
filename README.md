@@ -1,6 +1,6 @@
-## parasiteR
+## helminthR
 
-[![Build Status](https://travis-ci.org/ropensci/parasiteR.svg?branch=master)](https://travis-ci.org/ropensci/parasiteR)
+[![Build Status](https://travis-ci.org/ropensci/helminthR.svg?branch=master)](https://travis-ci.org/ropensci/helminthR)
 
 > Programmatically access the London Natural History Museum's [helminth database](http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/index.html). 
 
@@ -10,8 +10,8 @@
 ```r
 # From GitHub
 # install.packages("devtools")
-devtools::install_github("rOpenSci/parasiteR")
-library("parasiteR")
+devtools::install_github("rOpenSci/helminthR")
+library("helminthR")
 ```
 
 

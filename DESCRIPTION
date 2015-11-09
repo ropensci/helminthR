@@ -1,12 +1,23 @@
-Package: parasiteR
+Package: helminthR
 Type: Package
-Title: Web scrapes parasite occurrence records from the London Natural History Museum's Host-Parasite database, which contains over a quarter of a million helminth records.
+Title: Web scrapes parasite occurrence records from the London Natural History
+    Museum's Host-Parasite database, which contains over a quarter of a million
+    helminth records.
 Version: 1.0.1
-Imports: rvest, devtools, testthat
+Imports:
+    rvest,
+    devtools,
+    testthat
 Date: 2015-09-20
-Author: Tad Dallas 
+Author: Tad Dallas
 Maintainer: Tad Dallas <tdallas@uga.edu>
-URL: http://github.com/rOpenSci/parasiteR
-BugReports: http://github.com/rOpenSci/parasiteR/issues
-Description: This package uses `rvest` to scrape parasite occurrence records from the London Natural History Museum's Host-Parasite database. The package currently allows you to query by host species, parasite species, and geographic location. There is no information on prevalence or intensity, but references are provided, and can be programmatically accessed using the `citation` argument to most package functions.
+URL: http://github.com/rOpenSci/helminthR
+BugReports: http://github.com/rOpenSci/helminthR/issues
+Description: This package uses `rvest` to scrape parasite occurrence records
+    from the London Natural History Museum's Host-Parasite database. The package
+    currently allows you to query by host species, parasite species, and geographic
+    location. There is no information on prevalence or intensity, but references are
+    provided, and can be programmatically accessed using the `citation` argument to
+    most package functions.
 License: GPL-3
+RoxygenNote: 5.0.0

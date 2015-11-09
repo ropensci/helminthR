@@ -1,4 +1,4 @@
 library(testthat)
-test_check("parasiteR")
+test_check("helminthR")
 
 
