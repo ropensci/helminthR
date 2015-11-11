@@ -4,7 +4,8 @@
 \alias{findHost}
 \title{Find parasite occurrence data for given host.}
 \usage{
-findHost(genus, species = "", location = "", citation = FALSE)
+findHost(genus = NULL, species = NULL, location = NULL,
+  citation = FALSE, hostState = NULL)
 }
 \arguments{
 \item{genus}{Host genus}
@@ -14,12 +15,14 @@ findHost(genus, species = "", location = "", citation = FALSE)
 \item{location}{Geographic location.}
 
 \item{citation}{Boolean. Should the output include the citation link? default is FALSE}
+
+\item{hostState}{number corresponding to one of six different host states. The default value is NULL
+includes all host states}
 }
 \value{
 Three (or four) column data.frame containing host species, parasite species
 (shortened name and full name), and citation link (optional), with each row 
-corresponding to an occurrence
-of a parasite species on a host species.
+corresponding to an occurrence of a parasite species on a host species.
 }
 \description{
 Given a host genus, species, and/or location, returns a list of parasite
@@ -28,11 +31,14 @@ using the `listLocations` function.
 }
 \details{
 `location` values can be listed using the `listLocations()` function.
+
+`hostState` can take values 1-6 corresponding to if the recorded host was found (1) "in the wild", 
+ (2) "Zoo captivity", (3) "Domesticated" , (4) "Experimental", (5) "Commercial source", or 
+ (6) "Accidental infestation". A vaule of NULL should be entered if you would like to include all hostStates.
 }
 \examples{
 
-gorillaParasites=findHost('Gorilla', 'gorilla')
-head(gorillaParasites)
+\dontrun{gorillaParasites <- findHost('Gorilla', 'gorilla')}
 
 }
 \author{
@@ -40,7 +46,7 @@ Tad Dallas
 }
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
-Host-Parasite Database of the Natural History Museum, London. URL.
+Host-Parasite Database of the Natural History Museum, London.
 }
 \seealso{
 \code{\link{findParasite}}

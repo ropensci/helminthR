@@ -4,18 +4,20 @@
 \alias{findLocation}
 \title{Find host-parasite interactions for a given location}
 \usage{
-findLocation(location = "", citation = FALSE)
+findLocation(location = NULL, citation = FALSE, hostState = NULL)
 }
 \arguments{
 \item{location}{Location of host-parasite interaction.}
 
 \item{citation}{Boolean. Should the output include the citation link? default is FALSE}
+
+\item{hostState}{number corresponding to one of six different host states. The default value is NULL
+includes all host states}
 }
 \value{
 Three (or four) column data.frame containing host species, parasite species
 (shortened name and full name), and citation link (optional), with each row 
-corresponding to an occurrence
-of a parasite species on a host species.
+corresponding to an occurrence of a parasite species on a host species.
 }
 \description{
 Given a location (available from `listLocations()`) this function returns
@@ -23,12 +25,14 @@ all host-parasite associations in that location.
 }
 \details{
 Use the `listLocations()` function for a list of possible locations.
+
+`hostState` can take values 1-6 corresponding to if the recorded host was found (1) "in the wild", 
+ (2) "Zoo captivity", (3) "Domesticated" , (4) "Experimental", (5) "Commercial source", or 
+ (6) "Accidental infestation". A vaule of NULL should be entered if you would like to include all hostStates.
 }
 \examples{
 
-
-FrenchHostPars=findLocation(location='France')
-dim(FrenchHostPars)
+\dontrun{ FrenchHostPars <- findLocation(location='France')}
 
 }
 \author{
@@ -36,7 +40,7 @@ Tad Dallas
 }
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
-Host-Parasite Database of the Natural History Museum, London. URL.
+Host-Parasite Database of the Natural History Museum, London.
 }
 \seealso{
 \code{\link{findHost}}
