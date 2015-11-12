@@ -40,17 +40,18 @@
 #' 
 
 findParasite <- function(group = NULL, subgroup = NULL, genus = NULL, 
-                         species = NULL, location = "", citation = FALSE, 
+                         species = NULL, location = NULL, citation = FALSE, 
                          hostState = NULL, speciesOnly = FALSE, 
                          validateHosts = TRUE, validateParasites = FALSE, 
                          outputTaxon = FALSE) {
-    if(!is.null(group)){
-      if(all((group == c('Cestodes', 'Acanthocephalans', 'Monogeneans', 'Nematodes','Trematodes', 'Turb')) == FALSE)){
-          stop("Parasite group must be one of the following: Cestodes, Acanthocephalans, Monogeneans, Nematodes, Trematodes, Turb")
-      }
-    }
+   if(!is.null(group)){
+     if(all((group == c('Cestodes', 'Acanthocephalans', 'Monogeneans', 'Nematodes','Trematodes', 'Turb')) == FALSE)){
+         stop("Parasite group must be one of the following: Cestodes, Acanthocephalans, Monogeneans, Nematodes, Trematodes, Turb")
+     }
+   }
     
-     data(locations)
+   if(!is.null(location)){
+    data(locations)
     if (location %in% locations[,1] == FALSE) {
         stop("Please choose a location from the possible locations in the listLocations() function")
     }
@@ -61,6 +62,7 @@ findParasite <- function(group = NULL, subgroup = NULL, genus = NULL,
         location4 <- gsub(" ", "+", location3)
         location <- location4
     }
+  }
     hpUrl <- html(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?dbfnsRowsPerPage=500000&x=13&y=5&paragroup=", group, "&fmsubgroup=Starts+with&subgroup=", subgroup, 
         "&fmparagenus=Starts+with&paragenus=", genus, "&fmparaspecies=Contains&paraspecies=", 
         species, "&fmhostgenus=Starts+with&hostgenus=&fmhostspecies=Starts+with&hostspecies=&location=", 
@@ -90,6 +92,9 @@ findParasite <- function(group = NULL, subgroup = NULL, genus = NULL,
                       ParasiteFull = hpList[, 1], 
                       Reference = citations)
     }
-
+    
+    ret <- .cleanData(ret, speciesOnly = speciesOnly , validateHosts = validateHosts, 
+                       validateParasites = validateParasites, outputTaxon = outputTaxon)
+    
     return(ret)
 } 

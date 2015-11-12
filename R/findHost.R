@@ -44,21 +44,23 @@
 findHost <- function(genus = NULL, species = NULL, location = NULL, 
                      citation = FALSE, hostState = NULL, speciesOnly = FALSE, 
                      validateHosts = TRUE, validateParasites = FALSE, 
-                     outputTaxon = FALSE)) {
-      data(locations)
-      if (location %in% locations[,1] == FALSE) {
+                     outputTaxon = FALSE) {
+   if(!is.null(location)){
+     data(locations)
+     if (location %in% locations[,1] == FALSE) {
         stop("Please choose a location from the possible locations in the listLocations() function")
-    }
-    if (location != "") {
-        location1 <- gsub("\\+", "%2B", location)
-        location2 <- gsub("\\(", "%28", location1)
-        location3 <- gsub("\\)", "%29", location2)
-        location4 <- gsub(" ", "+", location3)
-        location <- location4
-    }
-    hpUrl <- html(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?dbfnsRowsPerPage=500000&x=13&y=5&paragroup=&fmsubgroup=Starts+with&subgroup=&fmparagenus=Starts+with&paragenus=&fmparaspecies=Starts+with&paraspecies=&fmhostgenus=Contains&hostgenus=", 
+     }
+     if (location != "") {
+       location1 <- gsub("\\+", "%2B", location)
+       location2 <- gsub("\\(", "%28", location1)
+       location3 <- gsub("\\)", "%29", location2)
+       location4 <- gsub(" ", "+", location3)
+       location <- location4
+     }
+   }
+   hpUrl <- html(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?dbfnsRowsPerPage=500000&x=13&y=5&paragroup=&fmsubgroup=Starts+with&subgroup=&fmparagenus=Starts+with&paragenus=&fmparaspecies=Starts+with&paraspecies=&fmhostgenus=Contains&hostgenus=", 
         genus, "&fmhostspecies=Contains&hostspecies=", species, "&location=", location, "&hstate=", hostState, "&pstatus=&showparasites=on&showhosts=on&showrefs=on&groupby=parasite&search=Search", sep = ""))
-    names <- hpUrl %>% 
+   names <- hpUrl %>% 
             html_nodes(".searchlink") %>% 
             html_text()
 
@@ -85,6 +87,9 @@ findHost <- function(genus = NULL, species = NULL, location = NULL,
                       ParasiteFull = hpList[, 1], 
                       Reference = citations)
     }
-
+    
+    ret <- .cleanData(ret, speciesOnly = speciesOnly , validateHosts = validateHosts, 
+                       validateParasites = validateParasites, outputTaxon = outputTaxon)
+    
     return(ret)
 } 

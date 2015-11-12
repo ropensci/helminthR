@@ -4,7 +4,9 @@
 \alias{findLocation}
 \title{Find host-parasite interactions for a given location}
 \usage{
-findLocation(location = NULL, citation = FALSE, hostState = NULL)
+findLocation(location = NULL, citation = FALSE, hostState = NULL,
+  speciesOnly = FALSE, validateHosts = TRUE, validateParasites = FALSE,
+  outputTaxon = FALSE)
 }
 \arguments{
 \item{location}{Location of host-parasite interaction.}
@@ -13,6 +15,18 @@ findLocation(location = NULL, citation = FALSE, hostState = NULL)
 
 \item{hostState}{number corresponding to one of six different host states. The default value is NULL
 includes all host states}
+
+\item{speciesOnly}{boolean flag to remove host and parasite species 
+where data are only available at genus level (default = TRUE)}
+
+\item{validateHosts}{boolean flag to check host species names 
+against Catalogue of Life information (default = TRUE)}
+
+\item{validateParasites}{boolean flag to check parasite species names 
+against Catalogue of Life information (default = FALSE)}
+
+\item{outputTaxon}{boolean flag to output taxonomic information on hosts
+(default = FALSE)}
 }
 \value{
 Three (or four) column data.frame containing host species, parasite species

@@ -8,6 +8,9 @@
 data(locations)
 }
 \description{
+A cached copy of the output of listLocations().
+}
+\details{
 \itemize{
    \item Location. Name of geographic location
    \item Latitude. Latitude of location centroid

@@ -83,5 +83,9 @@ findLocation <- function(location = NULL, citation = FALSE, hostState = NULL,
                       ParasiteFull = hpList[, 1], 
                       Reference = citations)
     }
+
+    ret <- .cleanData(ret, speciesOnly = speciesOnly , validateHosts = validateHosts, 
+                       validateParasites = validateParasites, outputTaxon = outputTaxon)
+    
     return(ret)
 } 

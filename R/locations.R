@@ -1,5 +1,7 @@
 #' Table of geographic location names, and associated coordinates
 #'
+#' A cached copy of the output of listLocations().
+#'
 #'  \itemize{
 #'    \item Location. Name of geographic location
 #'    \item Latitude. Latitude of location centroid
