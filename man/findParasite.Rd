@@ -4,9 +4,15 @@
 \alias{findParasite}
 \title{Find host-parasite interactions for a given parasite species.}
 \usage{
-findParasite(genus, species = "", location = "", citation = FALSE)
+findParasite(group = NULL, subgroup = NULL, genus = NULL,
+  species = NULL, location = NULL, citation = FALSE, hostState = NULL,
+  speciesOnly = FALSE, validateHosts = FALSE)
 }
 \arguments{
+\item{group}{Parasite group - Cestodes, Acanthocephalans, Monogeneans, Nematodes, Trematodes, or Turbellarian etc. (Turb)}
+
+\item{subgroup}{Parasite subgroup (family names largely)}
+
 \item{genus}{Parasite genus}
 
 \item{species}{Parasite species}
@@ -14,12 +20,21 @@ findParasite(genus, species = "", location = "", citation = FALSE)
 \item{location}{Location of host-parasite interaction.}
 
 \item{citation}{Boolean. Should the output include the citation link? default is FALSE}
+
+\item{hostState}{number corresponding to one of six different host states. The default value is NULL
+includes all host states}
+
+\item{speciesOnly}{boolean flag to remove host and parasite species
+where data are only available at genus level (default = TRUE)}
+
+\item{validateHosts}{boolean flag to check host species names
+against Catalogue of Life information and output taxonomic
+information (default = FALSE)}
 }
 \value{
 Three (or four) column data.frame containing host species, parasite species
-(shortened name and full name), and citation link (optional), with each row 
-corresponding to an occurrence
-of a parasite species on a host species.
+(shortened name and full name), and citation link (optional), with each row
+corresponding to an occurrence of a parasite species on a host species.
 }
 \description{
 Given a host genus and/or species, this function returns a matrix containing
@@ -27,13 +42,14 @@ host-parasite interaction data.
 }
 \details{
 Use the `listLocations()` function for a list of possible locations.
+
+`hostState` can take values 1-6 corresponding to if the recorded host was found (1) "in the wild",
+ (2) "Zoo captivity", (3) "Domesticated" , (4) "Experimental", (5) "Commercial source", or
+ (6) "Accidental infestation". A vaule of NULL should be entered if you would like to include all hostStates.
 }
 \examples{
 
-
-strongHosts=findParasite(genus='Strongyloides')
-dim(strongHosts)
-
+\dontrun{strongHosts <- findParasite(genus = 'Strongyloides')}
 
 }
 \author{
@@ -41,7 +57,7 @@ Tad Dallas
 }
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
-Host-Parasite Database of the Natural History Museum, London. URL.
+Host-Parasite Database of the Natural History Museum, London.
 }
 \seealso{
 \code{\link{findHost}}
