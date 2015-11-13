@@ -6,8 +6,7 @@
 \usage{
 findParasite(group = NULL, subgroup = NULL, genus = NULL,
   species = NULL, location = NULL, citation = FALSE, hostState = NULL,
-  speciesOnly = FALSE, validateHosts = TRUE, validateParasites = FALSE,
-  outputTaxon = FALSE)
+  speciesOnly = FALSE, validateHosts = FALSE)
 }
 \arguments{
 \item{group}{Parasite group - Cestodes, Acanthocephalans, Monogeneans, Nematodes, Trematodes, or Turbellarian etc. (Turb)}
@@ -25,21 +24,16 @@ findParasite(group = NULL, subgroup = NULL, genus = NULL,
 \item{hostState}{number corresponding to one of six different host states. The default value is NULL
 includes all host states}
 
-\item{speciesOnly}{boolean flag to remove host and parasite species 
+\item{speciesOnly}{boolean flag to remove host and parasite species
 where data are only available at genus level (default = TRUE)}
 
-\item{validateHosts}{boolean flag to check host species names 
-against Catalogue of Life information (default = TRUE)}
-
-\item{validateParasites}{boolean flag to check parasite species names 
-against Catalogue of Life information (default = FALSE)}
-
-\item{outputTaxon}{boolean flag to output taxonomic information on hosts
-(default = FALSE)}
+\item{validateHosts}{boolean flag to check host species names
+against Catalogue of Life information and output taxonomic
+information (default = FALSE)}
 }
 \value{
 Three (or four) column data.frame containing host species, parasite species
-(shortened name and full name), and citation link (optional), with each row 
+(shortened name and full name), and citation link (optional), with each row
 corresponding to an occurrence of a parasite species on a host species.
 }
 \description{
@@ -49,8 +43,8 @@ host-parasite interaction data.
 \details{
 Use the `listLocations()` function for a list of possible locations.
 
-`hostState` can take values 1-6 corresponding to if the recorded host was found (1) "in the wild", 
- (2) "Zoo captivity", (3) "Domesticated" , (4) "Experimental", (5) "Commercial source", or 
+`hostState` can take values 1-6 corresponding to if the recorded host was found (1) "in the wild",
+ (2) "Zoo captivity", (3) "Domesticated" , (4) "Experimental", (5) "Commercial source", or
  (6) "Accidental infestation". A vaule of NULL should be entered if you would like to include all hostStates.
 }
 \examples{
