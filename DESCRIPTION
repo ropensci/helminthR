@@ -4,7 +4,7 @@ Title: Access London Natural History Museum host-helminth record database
 Version: 1.0.1
 Date: 2015-11-09
 Author: Tad Dallas
-Imports: XML, xml2, rvest, magrittr, plyr, ggmap
+Imports:  xml2, rvest, magrittr, plyr, ggmap
 Suggests: testthat
 Maintainer: Tad Dallas <tdallas@uga.edu>
 URL: http://github.com/rOpenSci/helminthR
