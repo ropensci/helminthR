@@ -5,7 +5,6 @@
 #' no information on prevalence or intensity.
 #'
 #' @importFrom ggmap geocode
-#' @importFrom XML xmlRoot xmlParse xmlAttrs getNodeSet
 #' @importFrom rvest html html_nodes html_text html_attr
 #' @importFrom magrittr %>%
 #' @importFrom plyr ldply

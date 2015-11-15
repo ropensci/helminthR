@@ -23,13 +23,19 @@ cleanData <- function(edge, speciesOnly=FALSE, validateHosts = FALSE){
 
  # remove entries not at species level
   if(speciesOnly){
-    if(any(grep('sp\\.', edge$Host))){
+    if(length(grep('sp\\.', edge$Host)) > 0 ){
       edge <- edge[-grep(' sp\\.', edge$Host), ]
     }
-    if(any(grep('sp\\.', edge$Parasite))){
+    if(length(grep('sp\\.', edge$Parasite)) > 0){
       edge <- edge[-grep(' sp\\.', edge$Parasite), ]
     }
-  }
+    if(length(grep(".*\\((.*)\\).*", edge$Host )) > 0){
+     edge <- edge[-grep(".*\\((.*)\\).*", edge$Host),]
+    }
+    if(length(grep(".*\\((.*)\\).*", edge$Parasite )) > 0){
+     edge <- edge[-grep(".*\\((.*)\\).*", edge$Parasite),]
+   }
+}
 
 
  # validate host records
