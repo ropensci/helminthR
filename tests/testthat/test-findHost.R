@@ -12,8 +12,4 @@ test_that("findHost finds the host", {
 	wildMousey <- findHost(genus="Peromyscus", species="leucopus", citation=TRUE, hostState=1)
 	expect_is(wildMousey, "data.frame")
 
-	taxMousey <-  findHost(genus="Peromyscus", species="leucopus", citation=TRUE,
-	                                              hostState=1, speciesOnly=TRUE, validateHosts = TRUE)
-	expect_is(taxMousey, "list")
-
 })

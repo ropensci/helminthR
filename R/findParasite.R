@@ -48,7 +48,7 @@ findParasite <- function(group = NULL, subgroup = NULL, genus = NULL,
    }
 
    if(!is.null(location)){
-    data(locations)
+    data(locations, environment=environment())
     if (location %in% locations[,1] == FALSE) {
         stop("Please choose a location from the possible locations in the listLocations() function")
     }
@@ -60,12 +60,15 @@ findParasite <- function(group = NULL, subgroup = NULL, genus = NULL,
         location <- location4
     }
   }
-    hpUrl <- html(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?dbfnsRowsPerPage=500000&x=13&y=5&paragroup=", group, "&fmsubgroup=Starts+with&subgroup=", subgroup,
+    hpUrl <- read_html(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?dbfnsRowsPerPage=500000&x=13&y=5&paragroup=", group, "&fmsubgroup=Starts+with&subgroup=", subgroup,
         "&fmparagenus=Starts+with&paragenus=", genus, "&fmparaspecies=Contains&paraspecies=",
         species, "&fmhostgenus=Starts+with&hostgenus=&fmhostspecies=Starts+with&hostspecies=&location=",
         location, "&hstate=", hostState, "&pstatus=&showparasites=on&showhosts=on&showrefs=on&groupby=parasite&search=Search",
         sep = ""))
-    names <- hpUrl %>% html_nodes(".searchlink") %>% html_text()
+    names <- hpUrl %>%
+                     html_nodes(".searchlink") %>%
+                     html_text()
+                     
     hpList <- matrix(names, ncol = 2, byrow = TRUE)
     parNames <- sapply(hpList[, 1], strsplit, " ")
     parNames2 <- lapply(parNames, function(a) {
