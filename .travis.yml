@@ -11,9 +11,6 @@ before_install:
 script:
   - ./travis-tool.sh run_tests
 
-after_success:
-  - Rscript -e 'covr::codecov()'
-
 notifications:
   email:
     on_success: change
