@@ -40,7 +40,6 @@ findLocation <- function(location = NULL, citation = FALSE, hostState = NULL,
     stop("Please choose a location from the possible locations in the listLocations() function")
   }
 
-  data(locations)
   if (location %in% locations[,1] == FALSE) {
     stop("Please choose a location from the possible locations in the listLocations() function")
     }
@@ -51,7 +50,7 @@ findLocation <- function(location = NULL, citation = FALSE, hostState = NULL,
     location4 <- gsub(" ", "+", location3)
     location <- location4
 
-    hpUrl <- html(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?dbfnsRowsPerPage=50000&x=15&y=10&paragroup=&fmsubgroup=Starts+with&subgroup=&fmparagenus=Starts+with&paragenus=&fmparaspecies=Starts+with&paraspecies=&fmhostgenus=Contains&hostgenus=&fmhostspecies=Contains&hostspecies=&location=", location, "&hstate=", hostState, "&pstatus=&showparasites=on&showhosts=on&showrefs=on&groupby=parasite&search=Search", sep = ""))
+    hpUrl <- read_html(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?dbfnsRowsPerPage=50000&x=15&y=10&paragroup=&fmsubgroup=Starts+with&subgroup=&fmparagenus=Starts+with&paragenus=&fmparaspecies=Starts+with&paraspecies=&fmhostgenus=Contains&hostgenus=&fmhostspecies=Contains&hostspecies=&location=", location, "&hstate=", hostState, "&pstatus=&showparasites=on&showhosts=on&showrefs=on&groupby=parasite&search=Search", sep = ""))
 
     names <- hpUrl %>% html_nodes(".searchlink") %>% html_text()
     hpList <- matrix(names, ncol = 2, byrow = TRUE)

@@ -10,9 +10,6 @@
 #'  (2) "Zoo captivity", (3) "Domesticated" , (4) "Experimental", (5) "Commercial source", or
 #'  (6) "Accidental infestation". A vaule of NULL should be entered if you would like to include all hostStates.
 #'
-#'
-#'
-#'
 #' @param genus Host genus
 #' @param species Host species
 #' @param location Geographic location.
@@ -43,7 +40,7 @@ findHost <- function(genus = NULL, species = NULL, location = NULL,
                      citation = FALSE, hostState = NULL, speciesOnly = FALSE,
                      validateHosts = FALSE) {
    if(!is.null(location)){
-     data(locations)
+     #data(locations)
      if (location %in% locations[,1] == FALSE) {
         stop("Please choose a location from the possible locations in the listLocations() function")
      }
@@ -55,8 +52,9 @@ findHost <- function(genus = NULL, species = NULL, location = NULL,
        location <- location4
      }
    }
-   hpUrl <- html(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?dbfnsRowsPerPage=500000&x=13&y=5&paragroup=&fmsubgroup=Starts+with&subgroup=&fmparagenus=Starts+with&paragenus=&fmparaspecies=Starts+with&paraspecies=&fmhostgenus=Contains&hostgenus=",
-        genus, "&fmhostspecies=Contains&hostspecies=", species, "&location=", location, "&hstate=", hostState, "&pstatus=&showparasites=on&showhosts=on&showrefs=on&groupby=parasite&search=Search", sep = ""))
+
+   hpUrl <- read_html(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?dbfnsRowsPerPage=500000&x=13&y=5&paragroup=&fmsubgroup=Starts+with&subgroup=&fmparagenus=Starts+with&paragenus=&fmparaspecies=Starts+with&paraspecies=&fmhostgenus=Contains&hostgenus=",   genus, "&fmhostspecies=Contains&hostspecies=", species, "&location=", location, "&hstate=", hostState, "&pstatus=&showparasites=on&showhosts=on&showrefs=on&groupby=parasite&search=Search", sep = ""))
+
    names <- hpUrl %>%
             html_nodes(".searchlink") %>%
             html_text()

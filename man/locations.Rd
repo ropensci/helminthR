@@ -4,18 +4,16 @@
 \name{locations}
 \alias{locations}
 \title{Table of geographic location names, and associated coordinates}
+\format{\describe{
+   \item{Location}{Name of geographic location}
+   \item{Latitude}{Latitude of location centroid}
+   \item{Longitude}{Longitude of location centroid}
+ }}
 \usage{
 data(locations)
 }
 \description{
 A cached copy of the output of listLocations().
-}
-\details{
-\itemize{
-   \item Location. Name of geographic location
-   \item Latitude. Latitude of location centroid
-   \item Longitude. Longitude of location centroid
- }
 }
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
