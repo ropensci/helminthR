@@ -11,6 +11,9 @@ before_install:
 script:
   - ./travis-tool.sh run_tests
 
+after_success:
+  - Rscript -e 'library(covr); codecov(token = "9ee67667-7a10-406c-a982-23c86af5d682" )'
+
 notifications:
   email:
     on_success: change
