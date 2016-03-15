@@ -13,5 +13,5 @@
 #' @aliases helminthR
 #' @docType package
 #' @author Tad Dallas \email{tdallas@@uga.edu}
-#' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
+
 NULL

@@ -12,7 +12,5 @@ no information on prevalence or intensity.
 }
 \author{
 Tad Dallas \email{tdallas@uga.edu}
-
-Scott Chamberlain \email{myrmecocystus@gmail.com}
 }
 
