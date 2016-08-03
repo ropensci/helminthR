@@ -6,7 +6,7 @@
 \usage{
 findHost(genus = NULL, species = NULL, location = NULL,
   citation = FALSE, hostState = NULL, speciesOnly = FALSE,
-  validateHosts = FALSE)
+  validateHosts = FALSE, parGroup = NULL)
 }
 \arguments{
 \item{genus}{Host genus}
@@ -26,6 +26,8 @@ where data are only available at genus level (default = TRUE)}
 \item{validateHosts}{boolean flag to check host species names
 against Catalogue of Life information and output taxonomic
 information (default = FALSE)}
+
+\item{parGroup}{name of parasite group to query (default is to query all groups)}
 }
 \value{
 Three (or four) column data.frame containing host species, parasite species
@@ -43,6 +45,8 @@ using the `listLocations` function.
 `hostState` can take values 1-6 corresponding to if the recorded host was found (1) "in the wild",
  (2) "Zoo captivity", (3) "Domesticated" , (4) "Experimental", (5) "Commercial source", or
  (6) "Accidental infestation". A vaule of NULL should be entered if you would like to include all hostStates.
+
+`parGroup` can be specified as "Acanthocephalans", "Cestodes", "Monogeans", "Nematodes", "Trematodes", or "Turbs" (Turbellarians etc.). The default will search all groups
 }
 \examples{
 

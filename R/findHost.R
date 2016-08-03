@@ -10,6 +10,8 @@
 #'  (2) "Zoo captivity", (3) "Domesticated" , (4) "Experimental", (5) "Commercial source", or
 #'  (6) "Accidental infestation". A vaule of NULL should be entered if you would like to include all hostStates.
 #'
+#' `parGroup` can be specified as "Acanthocephalans", "Cestodes", "Monogeans", "Nematodes", "Trematodes", or "Turbs" (Turbellarians etc.). The default will search all groups
+#'
 #' @param genus Host genus
 #' @param species Host species
 #' @param location Geographic location.
@@ -21,6 +23,7 @@
 #' @param validateHosts boolean flag to check host species names
 #'        against Catalogue of Life information and output taxonomic
 #'        information (default = FALSE)
+#' @param parGroup name of parasite group to query (default is to query all groups)
 #'
 #' @return Three (or four) column data.frame containing host species, parasite species
 #' (shortened name and full name), and citation link (optional), with each row
@@ -38,7 +41,7 @@
 
 findHost <- function(genus = NULL, species = NULL, location = NULL,
                      citation = FALSE, hostState = NULL, speciesOnly = FALSE,
-                     validateHosts = FALSE) {
+                     validateHosts = FALSE, parGroup=NULL) {
    if(!is.null(location)){
      #data(locations)
      if (location %in% locations[,1] == FALSE) {
@@ -52,8 +55,8 @@ findHost <- function(genus = NULL, species = NULL, location = NULL,
        location <- location4
      }
    }
-
-   hpUrl <- read_html(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?dbfnsRowsPerPage=500000&x=13&y=5&paragroup=&fmsubgroup=Starts+with&subgroup=&fmparagenus=Starts+with&paragenus=&fmparaspecies=Starts+with&paraspecies=&fmhostgenus=Contains&hostgenus=",   genus, "&fmhostspecies=Contains&hostspecies=", species, "&location=", location, "&hstate=", hostState, "&pstatus=&showparasites=on&showhosts=on&showrefs=on&groupby=parasite&search=Search", sep = ""))
+if(is.null(parGroup)){parGroup <- ''}
+hpUrl <- read_html(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?dbfnsRowsPerPage=500000&x=13&y=5&paragroup=", parGroup, "&fmsubgroup=Starts+with&subgroup=&fmparagenus=Starts+with&paragenus=&fmparaspecies=Starts+with&paraspecies=&fmhostgenus=Contains&hostgenus=",   genus, "&fmhostspecies=Contains&hostspecies=", species, "&location=", location, "&hstate=", hostState, "&pstatus=&showparasites=on&showhosts=on&showrefs=on&groupby=parasite&search=Search", sep = ""))
 
    names <- hpUrl %>%
             html_nodes(".searchlink") %>%
