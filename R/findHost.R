@@ -24,9 +24,10 @@
 #'        against Catalogue of Life information and output taxonomic
 #'        information (default = FALSE)
 #' @param parGroup name of parasite group to query (default is to query all groups)
+#' @param removeDuplicates (boolean) should duplicate host-parasite combinations be removed? (default is FALSE)
 #'
-#' @return Three (or four) column data.frame containing host species, parasite species
-#' (shortened name and full name), and citation link (optional), with each row
+#' @return Three (or five) column data.frame containing host species, parasite species
+#' (shortened name and full name), and citation link and number of citations (if `citation`=TRUE), with each row
 #' corresponding to an occurrence of a parasite species on a host species.
 #'
 #' @author Tad Dallas
@@ -38,10 +39,16 @@
 #'
 #' \dontrun{gorillaParasites <- findHost('Gorilla', 'gorilla')}
 #'
+#' # An example of how to query multiple hosts when you have a vector of host species names
+#'
+#' hosts <- c('Gorilla gorilla', 'Peromyscus leucopus')
+#' \dontrun{plyr::ldply(hosts, function(x){findHost(unlist(strsplit(x, ' '))[1], unlist(strsplit(x,' '))[2])})}
+#'
+
 
 findHost <- function(genus = NULL, species = NULL, location = NULL,
                      citation = FALSE, hostState = NULL, speciesOnly = FALSE,
-                     validateHosts = FALSE, parGroup=NULL) {
+                     validateHosts = FALSE, parGroup=NULL, removeDuplicates=FALSE) {
    if(!is.null(location)){
      #data(locations)
      if (location %in% locations[,1] == FALSE) {
@@ -80,12 +87,15 @@ hpUrl <- read_html(paste("http://www.nhm.ac.uk/research-curation/scientific-reso
 
  if(citation){
       citeLinks <- hpUrl %>% html_nodes("td~ td+ td a") %>% html_attr("href")
+      citeNumber <- hpUrl %>% html_nodes("td~ td+ td a") %>% html_text()
+      citeNumber <- plyr::laply(strsplit(citeNumber, ' '), function(x){as.numeric(x[1])})
       citations <- paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/", citeLinks, sep='')
       ret <- data.frame(Host = hpList[, 2], Parasite = parNamesShort,
                       ParasiteFull = hpList[, 1],
-                      Reference = citations)
+                      Reference = citations,
+                      CitationNumber = citeNumber)
     }
-
+    if(removeDuplicates){ret <- ret[!duplicated(ret[,1:2]), ]}
     ret <- cleanData(ret, speciesOnly = speciesOnly , validateHosts = validateHosts)
     return(ret)
 }

@@ -6,7 +6,7 @@
 \usage{
 findHost(genus = NULL, species = NULL, location = NULL,
   citation = FALSE, hostState = NULL, speciesOnly = FALSE,
-  validateHosts = FALSE, parGroup = NULL)
+  validateHosts = FALSE, parGroup = NULL, removeDuplicates = FALSE)
 }
 \arguments{
 \item{genus}{Host genus}
@@ -28,10 +28,12 @@ against Catalogue of Life information and output taxonomic
 information (default = FALSE)}
 
 \item{parGroup}{name of parasite group to query (default is to query all groups)}
+
+\item{removeDuplicates}{(boolean) should duplicate host-parasite combinations be removed? (default is FALSE)}
 }
 \value{
-Three (or four) column data.frame containing host species, parasite species
-(shortened name and full name), and citation link (optional), with each row
+Three (or five) column data.frame containing host species, parasite species
+(shortened name and full name), and citation link and number of citations (if `citation`=TRUE), with each row
 corresponding to an occurrence of a parasite species on a host species.
 }
 \description{
@@ -51,6 +53,11 @@ using the `listLocations` function.
 \examples{
 
 \dontrun{gorillaParasites <- findHost('Gorilla', 'gorilla')}
+
+# An example of how to query multiple hosts when you have a vector of host species names
+
+hosts <- c('Gorilla gorilla', 'Peromyscus leucopus')
+\dontrun{plyr::ldply(hosts, function(x){findHost(unlist(strsplit(x, ' '))[1], unlist(strsplit(x,' '))[2])})}
 
 }
 \author{

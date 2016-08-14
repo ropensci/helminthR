@@ -4,18 +4,18 @@
 \alias{findParasite}
 \title{Find host-parasite interactions for a given parasite species.}
 \usage{
-findParasite(group = NULL, subgroup = NULL, genus = NULL,
-  species = NULL, location = NULL, citation = FALSE, hostState = NULL,
-  speciesOnly = FALSE, validateHosts = FALSE)
+findParasite(genus = NULL, species = NULL, group = NULL,
+  subgroup = NULL, location = NULL, citation = FALSE, hostState = NULL,
+  speciesOnly = FALSE, validateHosts = FALSE, removeDuplicates = FALSE)
 }
 \arguments{
-\item{group}{Parasite group - Cestodes, Acanthocephalans, Monogeneans, Nematodes, Trematodes, or Turbellarian etc. (Turb)}
-
-\item{subgroup}{Parasite subgroup (family names largely)}
-
 \item{genus}{Parasite genus}
 
 \item{species}{Parasite species}
+
+\item{group}{Parasite group - Cestodes, Acanthocephalans, Monogeneans, Nematodes, Trematodes, or Turbellarian etc. (Turb)}
+
+\item{subgroup}{Parasite subgroup (family names largely)}
 
 \item{location}{Location of host-parasite interaction.}
 
@@ -30,10 +30,12 @@ where data are only available at genus level (default = TRUE)}
 \item{validateHosts}{boolean flag to check host species names
 against Catalogue of Life information and output taxonomic
 information (default = FALSE)}
+
+\item{removeDuplicates}{(boolean) should duplicate host-parasite combinations be removed? (default is FALSE)}
 }
 \value{
-Three (or four) column data.frame containing host species, parasite species
-(shortened name and full name), and citation link (optional), with each row
+Three (or five) column data.frame containing host species, parasite species
+(shortened name and full name), and citation link and number of citations (if `citation`=TRUE), with each row
 corresponding to an occurrence of a parasite species on a host species.
 }
 \description{
@@ -51,6 +53,10 @@ Use the `listLocations()` function for a list of possible locations.
 
 \dontrun{strongHosts <- findParasite(genus = 'Strongyloides')}
 
+# An example of how to query multiple parasite species when you have a vector of parasite species names
+
+parasites <- c('Ascaris aculeati', 'Oxyuris flagellum')
+\dontrun{plyr::ldply(parasites, function(x){findParasite(unlist(strsplit(x, ' '))[1], unlist(strsplit(x,' '))[2])})}
 }
 \author{
 Tad Dallas

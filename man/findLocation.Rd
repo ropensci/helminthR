@@ -5,7 +5,7 @@
 \title{Find host-parasite interactions for a given location}
 \usage{
 findLocation(location = NULL, citation = FALSE, hostState = NULL,
-  speciesOnly = FALSE, validateHosts = FALSE)
+  speciesOnly = FALSE, validateHosts = FALSE, removeDuplicates = FALSE)
 }
 \arguments{
 \item{location}{Location of host-parasite interaction.}
@@ -21,10 +21,12 @@ where data are only available at genus level (default = TRUE)}
 \item{validateHosts}{boolean flag to check host species names
 against Catalogue of Life information and output taxonomic
 information (default = FALSE)}
+
+\item{removeDuplicates}{(boolean) should duplicate host-parasite combinations be removed? (default is FALSE)}
 }
 \value{
-Three (or four) column data.frame containing host species, parasite species
-(shortened name and full name), and citation link (optional), with each row
+Three (or five) column data.frame containing host species, parasite species
+(shortened name and full name), and citation link and number of citations (if `citation`=TRUE), with each row
 corresponding to an occurrence of a parasite species on a host species.
 }
 \description{

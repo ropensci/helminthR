@@ -18,9 +18,10 @@
 #' @param validateHosts boolean flag to check host species names
 #'        against Catalogue of Life information and output taxonomic
 #'        information (default = FALSE)
+#' @param removeDuplicates (boolean) should duplicate host-parasite combinations be removed? (default is FALSE)
 #'
-#' @return Three (or four) column data.frame containing host species, parasite species
-#' (shortened name and full name), and citation link (optional), with each row
+#' @return Three (or five) column data.frame containing host species, parasite species
+#' (shortened name and full name), and citation link and number of citations (if `citation`=TRUE), with each row
 #' corresponding to an occurrence of a parasite species on a host species.
 #'
 #' @author Tad Dallas
@@ -34,7 +35,8 @@
 #'
 
 findLocation <- function(location = NULL, citation = FALSE, hostState = NULL,
-                         speciesOnly = FALSE, validateHosts = FALSE) {
+                         speciesOnly = FALSE, validateHosts = FALSE, 
+                         removeDuplicates=FALSE){
 
   if(is.null(location)){
     stop("Please choose a location from the possible locations in the listLocations() function")
@@ -75,12 +77,16 @@ findLocation <- function(location = NULL, citation = FALSE, hostState = NULL,
 
     if(citation){
       citeLinks <- hpUrl %>% html_nodes("td~ td+ td a") %>% html_attr("href")
+      citeNumber <- hpUrl %>% html_nodes("td~ td+ td a") %>% html_text()
+      citeNumber <- plyr::laply(strsplit(citeNumber, ' '), function(x){as.numeric(x[1])})
       citations <- paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/", citeLinks, sep='')
       ret <- data.frame(Host = hpList[, 2], Parasite = parNamesShort,
                       ParasiteFull = hpList[, 1],
-                      Reference = citations)
+                      Reference = citations,
+                      CitationNumber = citeNumber)
     }
 
+    if(removeDuplicates){ret <- ret[!duplicated(ret[,1:2]), ]}
     ret <- cleanData(ret, speciesOnly = speciesOnly , validateHosts = validateHosts)
     return(ret)
 }
