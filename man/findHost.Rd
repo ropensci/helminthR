@@ -57,7 +57,8 @@ using the `listLocations` function.
 # An example of how to query multiple hosts when you have a vector of host species names
 
 hosts <- c('Gorilla gorilla', 'Peromyscus leucopus')
-\dontrun{plyr::ldply(hosts, function(x){findHost(unlist(strsplit(x, ' '))[1], unlist(strsplit(x,' '))[2])})}
+\dontrun{plyr::ldply(hosts, function(x)
+    {findHost(unlist(strsplit(x, ' '))[1], unlist(strsplit(x,' '))[2])})}
 
 }
 \author{

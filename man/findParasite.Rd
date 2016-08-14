@@ -56,7 +56,8 @@ Use the `listLocations()` function for a list of possible locations.
 # An example of how to query multiple parasite species when you have a vector of parasite species names
 
 parasites <- c('Ascaris aculeati', 'Oxyuris flagellum')
-\dontrun{plyr::ldply(parasites, function(x){findParasite(unlist(strsplit(x, ' '))[1], unlist(strsplit(x,' '))[2])})}
+\dontrun{plyr::ldply(parasites, function(x){
+  findParasite(unlist(strsplit(x, ' '))[1], unlist(strsplit(x,' '))[2])})}
 }
 \author{
 Tad Dallas
