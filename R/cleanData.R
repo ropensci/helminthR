@@ -19,69 +19,70 @@
 #'
 #'
 
-cleanData <- function(edge, speciesOnly=FALSE, validateHosts = FALSE){
 
- # remove entries not at species level
-  if(speciesOnly){
-    if(length(grep('sp\\.', edge$Host)) > 0 ){
-      edge <- edge[-grep(' sp\\.', edge$Host), ]
+cleanData <- function (edge, speciesOnly = FALSE, validateHosts = FALSE)
+{
+    if (speciesOnly) {
+        if (length(grep("sp\\.", edge$Host)) > 0) {
+            edge <- edge[-grep(" sp\\.", edge$Host), ]
+        }
+        if (length(grep("sp\\.", edge$Parasite)) > 0) {
+            edge <- edge[-grep(" sp\\.", edge$Parasite), ]
+        }
+        if (length(grep(".*\\((.*)\\).*", edge$Host)) > 0) {
+            edge <- edge[-grep(".*\\((.*)\\).*", edge$Host),
+                ]
+        }
+        if (length(grep(".*\\((.*)\\).*", edge$Parasite)) > 0) {
+            edge <- edge[-grep(".*\\((.*)\\).*", edge$Parasite),
+                ]
+        }
     }
-    if(length(grep('sp\\.', edge$Parasite)) > 0){
-      edge <- edge[-grep(' sp\\.', edge$Parasite), ]
-    }
-    if(length(grep(".*\\((.*)\\).*", edge$Host )) > 0){
-     edge <- edge[-grep(".*\\((.*)\\).*", edge$Host),]
-    }
-    if(length(grep(".*\\((.*)\\).*", edge$Parasite )) > 0){
-     edge <- edge[-grep(".*\\((.*)\\).*", edge$Parasite),]
-   }
-}
-
-
- # validate host records
-  if(validateHosts){
-
-     validate <- function(hostName){
-       hostName <- as.character(hostName)
-        if(length(grep('sp\\.', hostName)) == 1){
-          hostName2 <- unlist(strsplit(hostName, ' '))[1]
-        }else{
-          hostName2 <- unlist(strsplit(hostName, ' '))[1:2]
+    if (validateHosts) {
+        validate <- function(hostName) {
+            hostName <- as.character(hostName)
+            if (length(grep("sp\\.", hostName)) == 1) {
+                hostName2 <- unlist(strsplit(hostName, " "))[1]
+            }
+            else {
+                hostName2 <- unlist(strsplit(hostName, " "))[1:2]
+            }
+            rootClife <- read_xml(paste("http://www.catalogueoflife.org/col/webservice?name=",
+                hostName2[1], "&response=full", sep = ""))
+            if (xml_attr(rootClife, "number_of_results_returned") ==
+                0) {
+                return(rep(NA, 8))
+            }
+            else {
+                for (i in 1:length(xml_children(rootClife))) {
+                  taxInfo <- xml_text(xml_find_all(xml_children(rootClife)[i],
+                    "classification/taxon/name"))
+                  names(taxInfo) <- xml_text(xml_find_all(xml_children(rootClife)[i],
+                    "classification/taxon/rank"))
+                  if (any(names(taxInfo) == "Genus") && taxInfo[which(names(taxInfo) ==
+                    "Genus")] == hostName2) {
+                    ret <- taxInfo
+                    break
+                  }
+                }
+            }
+            return(ret)
         }
 
-       rootClife <- read_xml(paste("http://www.catalogueoflife.org/col/webservice?name=", hostName2[1], "&response=full", sep=''))
-
-       if( xml_attr(rootClife, 'number_of_results_returned') == 0){
-          return(rep(NA, 8))
-       }else{
-        for(i in 1:length(xml_children(rootClife))){
-           taxInfo <- xml_text(xml_find_all(xml_children(rootClife)[i], 'classification/taxon/name'))
-           names(taxInfo) <- xml_text(xml_find_all(xml_children(rootClife)[i], 'classification/taxon/rank'))
-           if(any(names(taxInfo) == 'Genus') && taxInfo[which(names(taxInfo) == 'Genus')] == hostName2){
-             ret <- taxInfo
-             break
-           }
+        taxMat <- matrix(NA, ncol = 8, nrow = nrow(edge))
+        colnames(taxMat) <- c("Kingdom", "Phylum", "Class", "Order",
+            "Superfamily", "Family", "Genus", "Subgenus")
+        for (q in 1:nrow(edge)) {
+            temp <- validate(edge$Host[q])
+            taxMat[q, which(names(temp) %in% colnames(taxMat))] <- unlist(temp)
         }
-      }
-    return(ret)
+
+       if (any(apply(taxMat, 1, function(x) {all(is.na(x))}))) {
+            rmv <- which(apply(taxMat, 1, function(x) {all(is.na(x))}))
+            taxMat <- taxMat[-rmv, ]
+            edge <- edge[-rmv, ]
+        }
+        return(list(HPedge = edge, HostTaxon = taxMat))
     }
-
-    taxMat <- matrix(NA, ncol=8, nrow=nrow(edge))
-    colnames(taxMat) <- c("Kingdom", "Phylum", "Class", "Order", "Superfamily", "Family",
-"Genus", "Subgenus")
-
-    for(q in 1:nrow(edge)){
-      temp <- validate(edge$Host[q])
-      taxMat[q, which(names(temp) %in% colnames(taxMat))] <- temp
-    }
-
-    if(any(apply(taxMat,1,function(x){all(is.na(x))}))){
-      rmv <- which(apply(taxMat,1, function(x){all(is.na(x))}))
-      taxMat <- taxMat[-rmv,]
-      edge <- edge[-rmv,]
-    }
-    return(list(HPedge = edge, HostTaxon = taxMat))
-  }
-
-  return(edge)
+    return(edge)
 }
