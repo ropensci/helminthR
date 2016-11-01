@@ -10,11 +10,11 @@
 #'  (6) "Accidental infestation". A vaule of NULL should be entered if you would like to include all hostStates.
 #'
 #' @param location Location of host-parasite interaction.
-#' @param citation Boolean. Should the output include the citation link? default is FALSE
+#' @param citation Boolean. Should the output include the citation link and the number of supporting citations? default is FALSE
 #' @param hostState number corresponding to one of six different host states. The default value is NULL
 #'        includes all host states
 #' @param speciesOnly boolean flag to remove host and parasite species
-#'        where data are only available at genus level (default = TRUE)
+#'        where data are only available at genus level (default = FALSE)
 #' @param validateHosts boolean flag to check host species names
 #'        against Catalogue of Life information and output taxonomic
 #'        information (default = FALSE)
@@ -35,7 +35,7 @@
 #'
 
 findLocation <- function(location = NULL, citation = FALSE, hostState = NULL,
-                         speciesOnly = FALSE, validateHosts = FALSE, 
+                         speciesOnly = FALSE, validateHosts = FALSE,
                          removeDuplicates=FALSE){
 
   if(is.null(location)){

@@ -10,13 +10,13 @@ findLocation(location = NULL, citation = FALSE, hostState = NULL,
 \arguments{
 \item{location}{Location of host-parasite interaction.}
 
-\item{citation}{Boolean. Should the output include the citation link? default is FALSE}
+\item{citation}{Boolean. Should the output include the citation link and the number of supporting citations? default is FALSE}
 
 \item{hostState}{number corresponding to one of six different host states. The default value is NULL
 includes all host states}
 
 \item{speciesOnly}{boolean flag to remove host and parasite species
-where data are only available at genus level (default = TRUE)}
+where data are only available at genus level (default = FALSE)}
 
 \item{validateHosts}{boolean flag to check host species names
 against Catalogue of Life information and output taxonomic
