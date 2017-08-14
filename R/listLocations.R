@@ -13,6 +13,8 @@
 #' @author Tad Dallas
 #' @references Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
 #' Host-Parasite Database of the Natural History Museum, London. 
+#'
+#'
 #' @examples
 #' 
 #' \dontrun{listLocations()}
@@ -32,10 +34,11 @@ listLocations <-function(){
 
  loc1 <- vector()
   for(i in 1:length(loc)){
- 	 if(any(unlist(strsplit(loc[i],'')) ==":")){
-		loc1[i]=sub(' ', '', tail(unlist(strsplit(loc[i], ':')),1))
+ 	 if(any(unlist(strsplit(loc[i],'')) == ":" )){
+		locTmp <- unlist(strsplit(loc[i], ':'))
+		loc1[i] <- trimws(locTmp[length(locTmp)])
 	 }else{
- 	   loc1[i] =loc[i]
+ 	   loc1[i] <- loc[i]
  	 }
    }
   latLong <- geocode(loc1)

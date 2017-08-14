@@ -9,11 +9,12 @@ Imports:
     rvest,
     magrittr,
     plyr,
-    ggmap
+    ggmap,
+		utils
 Suggests:
     testthat,
     ggplot2
-Maintainer: Tad Dallas <tdallas@uga.edu>
+Maintainer: Tad Dallas <tdallas@ucdavis.edu>
 URL: http://github.com/rOpenSci/helminthR
 BugReports: http://github.com/rOpenSci/helminthR/issues
 Description: helminthR: A programmatic interface to the London Natural History
@@ -21,5 +22,5 @@ Description: helminthR: A programmatic interface to the London Natural History
     host species, parasite species, and geographic location. There is no information
     on prevalence or intensity.
 License: GPL-3
-LazyData: true
-RoxygenNote: 5.0.1
+LazyData: yes
+RoxygenNote: 6.0.1

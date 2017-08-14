@@ -51,7 +51,6 @@ findHost <- function(genus = NULL, species = NULL, location = NULL,
                      citation = FALSE, hostState = NULL, speciesOnly = FALSE,
                      validateHosts = FALSE, parGroup=NULL, removeDuplicates=FALSE) {
    if(!is.null(location)){
-     #data(locations)
      if (location %in% locations[,1] == FALSE) {
         stop("Please choose a location from the possible locations in the listLocations() function")
      }

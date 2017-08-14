@@ -37,7 +37,6 @@
 findLocation <- function(location = NULL, citation = FALSE, hostState = NULL,
                          speciesOnly = FALSE, validateHosts = FALSE,
                          removeDuplicates=FALSE){
-
   if(is.null(location)){
     stop("Please choose a location from the possible locations in the listLocations() function")
   }
@@ -69,7 +68,11 @@ findLocation <- function(location = NULL, citation = FALSE, hostState = NULL,
     })
     names(parNames3) <- NULL
     parNamesShort <- unlist(parNames3)
-
+    if(is.null(parNamesShort)){
+      warning('No records matched your request');
+      return(data.frame(Host = NA, Parasite = NA,
+                      ParasiteFull = NA))
+    }
     if(citation == FALSE){
     ret <- data.frame(Host = hpList[, 2], Parasite = parNamesShort,
                       ParasiteFull = hpList[, 1])

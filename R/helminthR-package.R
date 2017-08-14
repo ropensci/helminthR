@@ -12,6 +12,6 @@
 #' @name helminthR-package
 #' @aliases helminthR
 #' @docType package
-#' @author Tad Dallas \email{tdallas@@uga.edu}
+#' @author Tad Dallas \email{tdallas@@ucdavis.edu}
 
 NULL

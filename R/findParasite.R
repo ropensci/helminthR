@@ -37,7 +37,8 @@
 #'
 #' \dontrun{strongHosts <- findParasite(genus = 'Strongyloides')}
 #'
-#' # An example of how to query multiple parasite species when you have a vector of parasite species names
+#' # An example of how to query multiple parasite species when 
+#' # you have a vector of parasite species names
 #'
 #' parasites <- c('Ascaris aculeati', 'Oxyuris flagellum')
 #' \dontrun{plyr::ldply(parasites, function(x){
@@ -54,8 +55,7 @@ findParasite <- function(genus = NULL,
    }
 
    if(!is.null(location)){
-    data(locations, environment=environment())
-    if (location %in% locations[,1] == FALSE) {
+	   if (location %in% locations[,1] == FALSE) {
         stop("Please choose a location from the possible locations in the listLocations() function")
     }
     if (location != "") {
