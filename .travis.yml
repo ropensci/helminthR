@@ -3,7 +3,7 @@ sudo: false
 cache: packages
 
 after_success:
-  - Rscript -e 'library(covr); codecov(token = "9ee67667-7a10-406c-a982-23c86af5d682" )'
+  - Rscript -e 'install.packages("covr"); library(covr); codecov(token = "9ee67667-7a10-406c-a982-23c86af5d682" )'
 
 notifications:
   email:
