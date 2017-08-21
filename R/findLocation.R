@@ -1,28 +1,37 @@
 #' Find host-parasite interactions for a given location
 #'
-#' Given a location (available from `listLocations()`) this function returns
-#' all host-parasite associations in that location.
+#' Given a location (available from \code{\link{listLocations}} this function 
+#'		returns all host-parasite associations in that location.
 #'
-#' Use the `listLocations()` function for a list of possible locations.
 #'
-#' `hostState` can take values 1-6 corresponding to if the recorded host was found (1) "in the wild",
-#'  (2) "Zoo captivity", (3) "Domesticated" , (4) "Experimental", (5) "Commercial source", or
-#'  (6) "Accidental infestation". A vaule of NULL should be entered if you would like to include all hostStates.
+#' \code{hostState} can take values 1-6 corresponding to if the recorded 
+#'		host was found 
+#' \itemize{ 
+#'		\item (1) "In the wild"
+#'		\item (2) "Zoo captivity" 
+#'		\item (3) "Domesticated"
+#'		\item (4) "Experimental"
+#'		\item (5) "Commercial source"
+#'		\item (6) "Accidental infestation"
+#'  }
 #'
 #' @param location Location of host-parasite interaction.
-#' @param citation Boolean. Should the output include the citation link and the number of supporting citations? default is FALSE
-#' @param hostState number corresponding to one of six different host states. The default value is NULL
-#'        includes all host states
+#' @param citation Boolean. Should the output include the citation link and 
+#'		the number of supporting citations? default is FALSE
+#' @param hostState number corresponding to one of six different host states. 
+#'		The default value is NULL and includes all host states.
 #' @param speciesOnly boolean flag to remove host and parasite species
 #'        where data are only available at genus level (default = FALSE)
 #' @param validateHosts boolean flag to check host species names
 #'        against Catalogue of Life information and output taxonomic
 #'        information (default = FALSE)
-#' @param removeDuplicates (boolean) should duplicate host-parasite combinations be removed? (default is FALSE)
+#' @param removeDuplicates (boolean) should duplicate host-parasite 
+#'		combinations be removed? (default is FALSE)
 #'
-#' @return Three (or five) column data.frame containing host species, parasite species
-#' (shortened name and full name), and citation link and number of citations (if `citation`=TRUE), with each row
-#' corresponding to an occurrence of a parasite species on a host species.
+#' @return Three (or five) column data.frame containing host species, 
+#'		parasite species (shortened name and full name), and citation link and 
+#'		number of citations (if `citation`=TRUE), with each row corresponding 
+#'		to an occurrence of a parasite species on a host species.
 #'
 #' @author Tad Dallas
 #' @seealso \code{\link{findHost}}
@@ -55,7 +64,7 @@ findLocation <- function(location = NULL, citation = FALSE, hostState = NULL,
 
     names <- hpUrl %>% html_nodes(".searchlink") %>% html_text()
     hpList <- matrix(names, ncol = 2, byrow = TRUE)
-    parNames <- sapply(hpList[, 1], strsplit, " ")
+    parNames <- vapply(hpList[, 1], strsplit, " ", FUN.VALUE=list(character(1)))
     parNames2 <- lapply(parNames, function(a) {
         if (length(a) < 2) {
             return(a)
@@ -69,7 +78,7 @@ findLocation <- function(location = NULL, citation = FALSE, hostState = NULL,
     names(parNames3) <- NULL
     parNamesShort <- unlist(parNames3)
     if(is.null(parNamesShort)){
-      warning('No records matched your request');
+      warning('No records matched your request')
       return(data.frame(Host = NA, Parasite = NA,
                       ParasiteFull = NA))
     }
@@ -81,7 +90,8 @@ findLocation <- function(location = NULL, citation = FALSE, hostState = NULL,
     if(citation){
       citeLinks <- hpUrl %>% html_nodes("td~ td+ td a") %>% html_attr("href")
       citeNumber <- hpUrl %>% html_nodes("td~ td+ td a") %>% html_text()
-      citeNumber <- plyr::laply(strsplit(citeNumber, ' '), function(x){as.numeric(x[1])})
+      citeNumber <- plyr::laply(strsplit(citeNumber, ' '), 
+				function(x){as.numeric(x[1])})
       citations <- paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/", citeLinks, sep='')
       ret <- data.frame(Host = hpList[, 2], Parasite = parNamesShort,
                       ParasiteFull = hpList[, 1],

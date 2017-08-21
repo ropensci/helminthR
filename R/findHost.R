@@ -2,33 +2,48 @@
 #'
 #' Given a host genus, species, and/or location, returns a list of parasite
 #' occurrences on that host or for that location. Search available locations
-#' using the `listLocations` function.
+#' using the \code{\link{listLocations}} function.
 #'
-#' `location` values can be listed using the `listLocations()` function.
 #'
-#' `hostState` can take values 1-6 corresponding to if the recorded host was found (1) "in the wild",
-#'  (2) "Zoo captivity", (3) "Domesticated" , (4) "Experimental", (5) "Commercial source", or
-#'  (6) "Accidental infestation". A vaule of NULL should be entered if you would like to include all hostStates.
+#' \code{hostState} can take values 1-6 corresponding to if the recorded host 
+#'		was found 
+#' \itemize{ 
+#'		\item (1) "In the wild"
+#'		\item (2) "Zoo captivity" 
+#'		\item (3) "Domesticated"
+#'		\item (4) "Experimental"
+#'		\item (5) "Commercial source"
+#'		\item (6) "Accidental infestation"
+#'  }
 #'
-#' `parGroup` can be specified as "Acanthocephalans", "Cestodes", "Monogeans", "Nematodes", "Trematodes", or "Turbs" (Turbellarians etc.). The default will search all groups
+#'  A vaule of NULL should be entered if you would like to include 
+#'		all hostStates.
+#'
+#' \code{parGroup} can be specified as "Acanthocephalans", "Cestodes",
+#'		"Monogeans", "Nematodes", "Trematodes", or "Turbs" (Turbellarians etc.). 
+#'		The default is to query all helminth parasite taxa.
+#'
 #'
 #' @param genus Host genus
 #' @param species Host species
 #' @param location Geographic location.
-#' @param citation Boolean. Should the output include the citation link and the number of supporting citations? default is FALSE
-#' @param hostState number corresponding to one of six different host states. The default value is NULL
-#'        includes all host states
+#' @param citation Boolean. Should the output include the citation link and 
+#'		the number of supporting citations? default is FALSE
+#' @param hostState number corresponding to one of six different host states. 
+#'		The default value is NULL and includes all host states
 #' @param speciesOnly boolean flag to remove host and parasite species
 #'        where data are only available at genus level (default = FALSE)
 #' @param validateHosts boolean flag to check host species names
 #'        against Catalogue of Life information and output taxonomic
 #'        information (default = FALSE)
-#' @param parGroup name of parasite group to query (default is to query all groups)
-#' @param removeDuplicates (boolean) should duplicate host-parasite combinations be removed? (default is FALSE)
+#' @param parGroup name of parasite group to query (default queries all groups)
+#' @param removeDuplicates (boolean) should duplicate host-parasite 
+#'		combinations be removed? (default is FALSE)
 #'
-#' @return Three (or five) column data.frame containing host species, parasite species
-#' (shortened name and full name), and citation link and number of citations (if `citation`=TRUE), with each row
-#' corresponding to an occurrence of a parasite species on a host species.
+#' @return Three (or five) column data.frame containing host species, 
+#'		parasite species (shortened name and full name), and citation link and 
+#'		number of citations (if `citation`=TRUE), with each row corresponding 
+#'		to an occurrence of a parasite species on a host species.
 #'
 #' @author Tad Dallas
 #' @seealso \code{\link{findParasite}}
@@ -39,7 +54,8 @@
 #'
 #' \dontrun{gorillaParasites <- findHost('Gorilla', 'gorilla')}
 #'
-#' # An example of how to query multiple hosts when you have a vector of host species names
+#' # An example of how to query multiple hosts when you have a 
+#' # vector of host species names
 #'
 #' hosts <- c('Gorilla gorilla', 'Peromyscus leucopus')
 #' \dontrun{plyr::ldply(hosts, function(x)
@@ -52,7 +68,8 @@ findHost <- function(genus = NULL, species = NULL, location = NULL,
                      validateHosts = FALSE, parGroup=NULL, removeDuplicates=FALSE) {
    if(!is.null(location)){
      if (location %in% locations[,1] == FALSE) {
-        stop("Please choose a location from the possible locations in the listLocations() function")
+        stop("Please choose a location from the possible 
+					locations in the listLocations() function")
      }
      if (location != "") {
        location1 <- gsub("\\+", "%2B", location)
@@ -70,7 +87,7 @@ hpUrl <- read_html(paste("http://www.nhm.ac.uk/research-curation/scientific-reso
             html_text()
 
     hpList <- matrix(names, ncol = 2, byrow = TRUE)
-    parNames <- sapply(hpList[, 1], strsplit, " ")
+    parNames <- vapply(hpList[, 1], strsplit, " ", FUN.VALUE=list(character(1)))
     parNames2 <- lapply(parNames, function(a) {
         if (length(a) < 2) {
             return(a)
@@ -83,12 +100,14 @@ hpUrl <- read_html(paste("http://www.nhm.ac.uk/research-curation/scientific-reso
     })
     names(parNames3) <- NULL
     parNamesShort <- unlist(parNames3)
-    ret <- data.frame(Host = hpList[, 2], Parasite = parNamesShort, ParasiteFull = hpList[, 1])
+    ret <- data.frame(Host = hpList[, 2], Parasite = parNamesShort, 
+			ParasiteFull = hpList[, 1])
 
  if(citation){
       citeLinks <- hpUrl %>% html_nodes("td~ td+ td a") %>% html_attr("href")
       citeNumber <- hpUrl %>% html_nodes("td~ td+ td a") %>% html_text()
-      citeNumber <- plyr::laply(strsplit(citeNumber, ' '), function(x){as.numeric(x[1])})
+      citeNumber <- plyr::laply(strsplit(citeNumber, ' '), 
+				function(x){as.numeric(x[1])})
       citations <- paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/", citeLinks, sep='')
       ret <- data.frame(Host = hpList[, 2], Parasite = parNamesShort,
                       ParasiteFull = hpList[, 1],
@@ -96,6 +115,7 @@ hpUrl <- read_html(paste("http://www.nhm.ac.uk/research-curation/scientific-reso
                       CitationNumber = citeNumber)
     }
     if(removeDuplicates){ret <- ret[!duplicated(ret[,1:2]), ]}
-    ret <- cleanData(ret, speciesOnly = speciesOnly , validateHosts = validateHosts)
+    ret <- cleanData(ret, speciesOnly = speciesOnly , 
+			validateHosts = validateHosts)
     return(ret)
 }

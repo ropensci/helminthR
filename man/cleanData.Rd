@@ -2,13 +2,13 @@
 % Please edit documentation in R/cleanData.R
 \name{cleanData}
 \alias{cleanData}
-\title{Clean host-parasite data in various ways}
+\title{Clean helminth parasite occurrence data}
 \usage{
 cleanData(edge, speciesOnly = FALSE, validateHosts = FALSE)
 }
 \arguments{
-\item{edge}{Host-parasite edgelist obtained from `findLocation`,
-`findHost`, or `findParasite`}
+\item{edge}{Host-parasite edgelist obtained from \code{\link{findLocation}},
+\code{\link{findHost}}, or \code{\link{findParasite}}}
 
 \item{speciesOnly}{boolean flag to remove host and parasite species
 where data are only available at genus level (default = FALSE)}
@@ -21,11 +21,14 @@ information (default = FALSE)}
 cleanEdge Host-parasite edgelist, but cleaned
 }
 \description{
-Given a host-parasite edgelist, this function can validate species names, provide further taxonomic information, remove records only to genus level,
+Given a host-parasite edgelist, this function can validate species names,
+provide further taxonomic information (thanks to \code{taxize}), 
+and remove records only to genus level.
 }
 \details{
-Use the `listLocations()` function for a list of possible locations.
+Use the \code{\link{listLocations}} function for a list of possible locations.
 }
 \author{
 Tad Dallas
 }
+

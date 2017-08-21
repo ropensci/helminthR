@@ -15,10 +15,11 @@ findHost(genus = NULL, species = NULL, location = NULL,
 
 \item{location}{Geographic location.}
 
-\item{citation}{Boolean. Should the output include the citation link and the number of supporting citations? default is FALSE}
+\item{citation}{Boolean. Should the output include the citation link and 
+the number of supporting citations? default is FALSE}
 
-\item{hostState}{number corresponding to one of six different host states. The default value is NULL
-includes all host states}
+\item{hostState}{number corresponding to one of six different host states. 
+The default value is NULL and includes all host states}
 
 \item{speciesOnly}{boolean flag to remove host and parasite species
 where data are only available at genus level (default = FALSE)}
@@ -27,39 +28,55 @@ where data are only available at genus level (default = FALSE)}
 against Catalogue of Life information and output taxonomic
 information (default = FALSE)}
 
-\item{parGroup}{name of parasite group to query (default is to query all groups)}
+\item{parGroup}{name of parasite group to query (default queries all groups)}
 
-\item{removeDuplicates}{(boolean) should duplicate host-parasite combinations be removed? (default is FALSE)}
+\item{removeDuplicates}{(boolean) should duplicate host-parasite 
+combinations be removed? (default is FALSE)}
 }
 \value{
-Three (or five) column data.frame containing host species, parasite species
-(shortened name and full name), and citation link and number of citations (if `citation`=TRUE), with each row
-corresponding to an occurrence of a parasite species on a host species.
+Three (or five) column data.frame containing host species, 
+	parasite species (shortened name and full name), and citation link and 
+	number of citations (if `citation`=TRUE), with each row corresponding 
+	to an occurrence of a parasite species on a host species.
 }
 \description{
 Given a host genus, species, and/or location, returns a list of parasite
 occurrences on that host or for that location. Search available locations
-using the `listLocations` function.
+using the \code{\link{listLocations}} function.
 }
 \details{
-`location` values can be listed using the `listLocations()` function.
+\code{hostState} can take values 1-6 corresponding to if the recorded host 
+	was found 
+\itemize{ 
+	\item (1) "In the wild"
+	\item (2) "Zoo captivity" 
+	\item (3) "Domesticated"
+	\item (4) "Experimental"
+	\item (5) "Commercial source"
+	\item (6) "Accidental infestation"
+ }
 
-`hostState` can take values 1-6 corresponding to if the recorded host was found (1) "in the wild",
- (2) "Zoo captivity", (3) "Domesticated" , (4) "Experimental", (5) "Commercial source", or
- (6) "Accidental infestation". A vaule of NULL should be entered if you would like to include all hostStates.
+A vaule of NULL should be entered if you would like to include 
+	all hostStates.
 
-`parGroup` can be specified as "Acanthocephalans", "Cestodes", "Monogeans", "Nematodes", "Trematodes", or "Turbs" (Turbellarians etc.). The default will search all groups
+\code{parGroup} can be specified as "Acanthocephalans", "Cestodes",
+	"Monogeans", "Nematodes", "Trematodes", or "Turbs" (Turbellarians etc.). 
+	The default is to query all helminth parasite taxa.
 }
 \examples{
 
 \dontrun{gorillaParasites <- findHost('Gorilla', 'gorilla')}
 
-# An example of how to query multiple hosts when you have a vector of host species names
+# An example of how to query multiple hosts when you have a 
+# vector of host species names
 
 hosts <- c('Gorilla gorilla', 'Peromyscus leucopus')
 \dontrun{plyr::ldply(hosts, function(x)
     {findHost(unlist(strsplit(x, ' '))[1], unlist(strsplit(x,' '))[2])})}
 
+}
+\author{
+Tad Dallas
 }
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
@@ -68,6 +85,4 @@ Host-Parasite Database of the Natural History Museum, London.
 \seealso{
 \code{\link{findParasite}}
 }
-\author{
-Tad Dallas
-}
+

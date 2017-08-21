@@ -1,6 +1,6 @@
 #' Table of geographic location names, and associated coordinates
 #'
-#' A cached copy of the output of listLocations().
+#' A cached copy of the output of \code{\link{listLocations}}.
 #'
 #' @format
 #'  \describe{
@@ -15,4 +15,8 @@
 #' @docType data
 #' @keywords data
 #' @usage data(locations)
-NULL
+
+if(getRversion() >= "2.15.1"){
+  utils::globalVariables('locations')
+}
+

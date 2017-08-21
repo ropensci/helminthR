@@ -13,10 +13,11 @@
 data(locations)
 }
 \description{
-A cached copy of the output of listLocations().
+A cached copy of the output of \code{\link{listLocations}}.
 }
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
 Host-Parasite Database of the Natural History Museum, London.
 }
 \keyword{data}
+
