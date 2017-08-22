@@ -41,6 +41,7 @@ listLocations <-function(){
  	 }
    }
   latLong <- geocode(loc1)
-  ret <- data.frame(Location = loc1, Latitude = latLong[,1], Longitude = latLong[,2])
+  ret <- data.frame(Location = loc1, Latitude = latLong[,1], 
+		Longitude = latLong[,2], stringsAsFactors = FALSE)
   return(ret)
 }

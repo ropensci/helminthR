@@ -105,7 +105,7 @@ findParasite <- function(genus = NULL, species = NULL,
     names(parNames3) <- NULL
     parNamesShort <- unlist(parNames3)
     ret <- data.frame(Host = hpList[, 2], Parasite = parNamesShort, 
-			ParasiteFull = hpList[, 1])
+			ParasiteFull = hpList[, 1], stringsAsFactors = FALSE)
 
  if(citation){
       citeLinks <- hpUrl %>% html_nodes("td~ td+ td a") %>% html_attr("href")
@@ -117,7 +117,7 @@ findParasite <- function(genus = NULL, species = NULL,
       ret <- data.frame(Host = hpList[, 2], Parasite = parNamesShort,
                       ParasiteFull = hpList[, 1],
                       Reference = citations,
-                      CitationNumber = citeNumber)
+                      CitationNumber = citeNumber, stringsAsFactors = FALSE)
     }
     if(removeDuplicates){ret <- ret[!duplicated(ret[,1:2]), ]}
     ret <- cleanData(ret, speciesOnly = speciesOnly , 

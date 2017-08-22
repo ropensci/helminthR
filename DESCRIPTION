@@ -22,4 +22,4 @@ Description: helminthR: A programmatic interface to the London Natural History
     There is no information on prevalence or intensity.
 License: GPL-3
 LazyData: yes
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

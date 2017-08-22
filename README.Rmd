@@ -15,18 +15,20 @@ See software note in _Ecography_ ([available here](http://onlinelibrary.wiley.co
 
 From GitHub
 
+```{r eval=FALSE}
 
-```r
 # install.packages("devtools")
 devtools::install_github("rOpenSci/helminthR")
 library("helminthR")
+
 ```
 
 From CRAN
 
+```{r eval=FALSE}
 
-```r
 install.packages("helminthR")
+
 ```
 
 
@@ -37,20 +39,22 @@ install.packages("helminthR")
 
 Given a host genus and (optionally) species and location, this function returns all host-parasite associations of a given host species. The example below determines all parasite records for helminth infections of _Gorilla gorilla_.
 
+```{r eval=FALSE}
 
-```r
 gorillaParasites <- findHost('Gorilla', 'gorilla')
 head(gorillaParasites)
+
 ```
 
 #### `findParasite()`
 
 Given a helminth parasite genus (and optionally species, and location), this function returns a list of host-parasite records for that parasite. In the example below, I query the database for occurrences of the genus _Strongyloides_.
 
+```{r eval=FALSE}
 
-```r
 strongHosts <- findParasite(genus='Strongyloides')
 str(strongHosts)
+
 ```
 
 
@@ -60,10 +64,11 @@ str(strongHosts)
 List all location names (`listLocations()`). These names can be given to the `findLocation()` function, which finds all host-parasite associations that have occurred in the given location. Below, I look at host-parasite associations recorded in France.
 
 
+```{r eval=FALSE}
 
-```r
 FrenchHostPars <- findLocation(location='France')
 str(FrenchHostPars)
+
 ```
 
 

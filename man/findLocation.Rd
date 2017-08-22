@@ -53,9 +53,6 @@ Given a location (available from \code{\link{listLocations}} this function
 \dontrun{ FrenchHostPars <- findLocation(location='France')}
 
 }
-\author{
-Tad Dallas
-}
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
 Host-Parasite Database of the Natural History Museum, London.
@@ -63,4 +60,6 @@ Host-Parasite Database of the Natural History Museum, London.
 \seealso{
 \code{\link{findHost}}
 }
-
+\author{
+Tad Dallas
+}

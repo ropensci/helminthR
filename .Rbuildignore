@@ -1,7 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 .travis.yml
-.git
-.gitignore
-README.md
+README.Rmd
 LICENSE
+cran-comments.md
+^CONDUCT\.md$
+Makefile
