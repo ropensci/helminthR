@@ -3,6 +3,8 @@ helminthR
 
 [![Build Status](https://travis-ci.org/ropensci/helminthR.svg?branch=master)](https://travis-ci.org/ropensci/helminthR)
 
+[![Windows Build Status](https://ci.appveyor.com/api/projects/status/rmq9euldm5gy9qup?svg=true)](https://ci.appveyor.com/project/taddallas/helminthr)
+
 [![codecov.io](https://codecov.io/github/ropensci/helminthR/coverage.svg?branch=master)](https://codecov.io/github/ropensci/helminthR?branch=master)
 
 
