@@ -1,6 +1,20 @@
 environment:
   R_CHECK_ARGS: --no-build-vignettes --no-manual
   USE_RTOOLS: true
+  global:
+    WARNINGS_ARE_ERRORS: 1
+  matrix:
+  - R_VERSION: devel
+    GCC_PATH: mingw_32
+
+  - R_VERSION: release
+    R_ARCH: x64
+
+  - R_VERSION: stable
+
+  - R_VERSION: oldrel
+    RTOOLS_VERSION: 33
+    CRAN: http://cran.rstudio.com
 
 init:
   ps: |
