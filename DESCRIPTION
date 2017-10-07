@@ -10,7 +10,8 @@ Imports:
     plyr,
     ggmap,
     utils,
-		knitr
+		knitr,
+		igraph
 Suggests:
     testthat,
     ggplot2,
