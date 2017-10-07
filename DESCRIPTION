@@ -14,7 +14,7 @@ Imports:
 Suggests:
     testthat,
     ggplot2,
-		VignetteBuilder
+VignetteBuilder: knitr
 Maintainer: Tad Dallas <tdallas@ucdavis.edu>
 URL: http://github.com/rOpenSci/helminthR
 BugReports: http://github.com/rOpenSci/helminthR/issues
