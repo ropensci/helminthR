@@ -1,0 +1,193 @@
+---
+title: "Introduction to the helminthR package"
+author: "Tad Dallas"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: readable
+vignette: >
+  %\VignetteIndexEntry{Introduction to the helminthR package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r echo=FALSE}
+library("knitr")
+hook_output <- knitr::knit_hooks$get("output")
+knitr::knit_hooks$set(output = function(x, options) {
+   lines <- options$output.lines
+   if (is.null(lines)) {
+     return(hook_output(x, options))  # pass to default hook
+   }
+   x <- unlist(strsplit(x, "\n"))
+   more <- "..."
+   if (length(lines)==1) {        # first n lines
+     if (length(x) > lines) {
+       # truncate the output, but add ....
+       x <- c(head(x, lines), more)
+     }
+   } else {
+     x <- c(if (abs(lines[1])>1) more else NULL,
+            x[lines],
+            if (length(x)>lines[abs(length(lines))]) more else NULL
+           )
+   }
+   # paste these lines together
+   x <- paste(c(x, ""), collapse = "\n")
+   hook_output(x, options)
+ })
+
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+
+
+This is an introduction to the `helminthR` package, whicih allows for the programmatic access to the London Natural History Museum's helminth parasite database ([available here](http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/index.html)). This database represents the largest known database of host-helminth interactions, containing host-helminth occurrence records for over 350 locations, including aquatic, marine, and terrestrial locations. 
+
+
+
+See software note in _Ecography_ ([available here](http://onlinelibrary.wiley.com/doi/10.1111/ecog.02131/full))
+
+
+
+### Installation
+
+From GitHub
+
+```{r eval=FALSE}
+
+# install.packages("devtools")
+devtools::install_github("rOpenSci/helminthR")
+library("helminthR")
+
+```
+
+From CRAN
+
+```{r eval=FALSE}
+
+install.packages("helminthR")
+
+```
+
+
+
+## Package functionality
+
+The package allows for the acquisition of host-helminth interaction records based on host name (genus or species), parasite name (genus, species, or group), and/or location (accepted region name as provided by the `listLocations()` function. Parasite groups include "Acanthocephalans", "Cestodes", "Monogeans", "Nematodes", "Trematodes", or "Turbs" (short for Turbellarians). The user can further define host species as occuring 
+
+
+
+1. "In the wild"
+2. "Zoo captivity" 
+3. "Domesticated"
+4. "Experimental"
+5. "Commercial source"
+6. "Accidental infestation"
+
+
+by inputting the corresponding number above in the `hostState` argument. 
+
+The package itself has three main functions; `findHost`, `findParasite`, and `findLocation`. 
+
+
+
+### Find all helminth parasites of a given host species
+
+Given a host genus and (optionally) species and location, this function returns all host-parasite associations of a given host species. The example below determines all parasite records for helminth infections of _Gorilla gorilla_. We also use the `citation` argument here to obtain information on the citations which the host-helminth occurrences are based on. 
+
+```{r eval=TRUE}
+library(helminthR)
+
+gorillaParasites <- findHost(genus='Gorilla', species='gorilla', 
+	hostState=1, speciesOnly=TRUE, citation=TRUE)
+dim(gorillaParasites)
+```
+
+
+```{r}
+head(gorillaParasites)
+
+```
+
+The above function will query the database for helminth parasites of _Gorilla gorilla_ that were captured in the wild, and will remove helminth parasites not identified to species. If the user wishes to query multiple host species at the same time, the user can do the following 
+
+```{r eval=FALSE}
+
+hosts <- c('Gorilla gorilla', 'Peromyscus leucopus')
+plyr::ldply(hosts, 
+	function(x){
+		findHost(unlist(strsplit(x, ' '))[1], 
+			unlist(strsplit(x,' '))[2])})
+	}
+
+```
+
+
+
+### Find all hosts of a given helminth parasite
+
+Given a helminth parasite genus (and optionally species, and location), this function returns a list of host-parasite records for that parasite. In the example below, I query the database for occurrences of the genus _Strongyloides_.
+
+```{r eval=TRUE}
+
+strongHosts <- findParasite(genus='Strongyloides')
+dim(strongHosts)
+```
+
+```{r}
+head(strongHosts)
+
+```
+
+
+
+### `listLocations()` and `findLocation()`
+
+List all location names (`listLocations()`). These names can be given to the `findLocation()` function, which finds all host-parasite associations that have occurred in the given location. Below, I look at host-parasite associations recorded in France.
+
+
+```{r eval=TRUE}
+
+montanaOcc <- findLocation(location='Montana')
+dim(montanaOcc)
+
+```
+
+```{r}
+head(montanaOcc)
+
+```
+
+
+### plotting host-helminth networks
+
+Below, I provide an example of plotting the bipartite network of host-helminth interactions found in the state of Montana. 
+
+```{r}
+g <- igraph::graph.incidence(table(montanaOcc[,1:2]))
+igraph::V(g)$name <- NA
+igraph::E(g)$color <- 'black'
+
+plot(g, 
+	vertex.color=c("black","dodgerblue")[igraph::V(g)$type+1],
+	vertex.size=5
+)
+ 
+```
+
+
+
+
+
+
+
+
