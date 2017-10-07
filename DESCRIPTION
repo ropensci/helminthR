@@ -11,6 +11,7 @@ Imports:
     ggmap,
     utils,
 		knitr,
+		rmarkdown,
 		igraph
 Suggests:
     testthat,
