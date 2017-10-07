@@ -23,10 +23,11 @@ of the country's centroid. The georeferencing is performed dynamically using
 \dontrun{listLocations()}
 
 }
+\author{
+Tad Dallas
+}
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
 Host-Parasite Database of the Natural History Museum, London.
 }
-\author{
-Tad Dallas
-}
+
