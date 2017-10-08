@@ -71,6 +71,9 @@ parasites <- c('Ascaris aculeati', 'Oxyuris flagellum')
 \dontrun{plyr::ldply(parasites, function(x){
   findParasite(unlist(strsplit(x, ' '))[1], unlist(strsplit(x,' '))[2])})}
 }
+\author{
+Tad Dallas
+}
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
 Host-Parasite Database of the Natural History Museum, London.
@@ -78,6 +81,4 @@ Host-Parasite Database of the Natural History Museum, London.
 \seealso{
 \code{\link{findHost}}
 }
-\author{
-Tad Dallas
-}
+

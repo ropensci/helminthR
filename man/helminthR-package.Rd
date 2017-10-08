@@ -2,8 +2,8 @@
 % Please edit documentation in R/helminthR-package.R
 \docType{package}
 \name{helminthR-package}
-\alias{helminthR-package}
 \alias{helminthR}
+\alias{helminthR-package}
 \title{Access London Natural History Museum host-helminth record database}
 \description{
 helminthR: A programmatic interface to the London Natural History Museum's Host-Parasite database.
@@ -14,3 +14,4 @@ and geographic location. No information is provided on parasite prevalence or in
 \author{
 Tad Dallas \email{tdallas@ucdavis.edu}
 }
+
