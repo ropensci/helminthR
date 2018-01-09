@@ -84,8 +84,6 @@ install.packages("helminthR")
 
 The package allows for the acquisition of host-helminth interaction records based on host name (genus or species), parasite name (genus, species, or group), and/or location (accepted region name as provided by the `listLocations()` function. Parasite groups include "Acanthocephalans", "Cestodes", "Monogeans", "Nematodes", "Trematodes", or "Turbs" (short for Turbellarians). The user can further define host species as occuring 
 
-
-
 1. "In the wild"
 2. "Zoo captivity" 
 3. "Domesticated"
@@ -105,15 +103,19 @@ The package itself has three main functions; `findHost`, `findParasite`, and `fi
 Given a host genus and (optionally) species and location, this function returns all host-parasite associations of a given host species. The example below determines all parasite records for helminth infections of _Gorilla gorilla_. We also use the `citation` argument here to obtain information on the citations which the host-helminth occurrences are based on. 
 
 ```{r eval=TRUE}
+
 library(helminthR)
 
 gorillaParasites <- findHost(genus='Gorilla', species='gorilla', 
 	hostState=1, speciesOnly=TRUE, citation=TRUE)
+
 dim(gorillaParasites)
+
 ```
 
 
 ```{r}
+
 head(gorillaParasites)
 
 ```
@@ -141,9 +143,11 @@ Given a helminth parasite genus (and optionally species, and location), this fun
 
 strongHosts <- findParasite(genus='Strongyloides')
 dim(strongHosts)
+
 ```
 
 ```{r}
+
 head(strongHosts)
 
 ```
@@ -155,14 +159,15 @@ head(strongHosts)
 List all location names (`listLocations()`). These names can be given to the `findLocation()` function, which finds all host-parasite associations that have occurred in the given location. Below, I look at host-parasite associations recorded in France.
 
 
-```{r eval=TRUE}
+```{r eval=FALSE}
 
 montanaOcc <- findLocation(location='Montana')
 dim(montanaOcc)
 
 ```
 
-```{r}
+```{r eval=FALSE}
+
 head(montanaOcc)
 
 ```
@@ -170,9 +175,10 @@ head(montanaOcc)
 
 ### plotting host-helminth networks
 
-Below, I provide an example of plotting the bipartite network of host-helminth interactions found in the state of Montana. 
+Below, I provide an example of code for plotting the bipartite network of host-helminth interactions found in the state of Montana. 
 
-```{r}
+```{r eval=FALSE}
+
 g <- igraph::graph.incidence(table(montanaOcc[,1:2]))
 igraph::V(g)$name <- NA
 igraph::E(g)$color <- 'black'
