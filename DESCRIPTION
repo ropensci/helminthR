@@ -18,8 +18,8 @@ Suggests:
     ggplot2,
 VignetteBuilder: knitr
 Maintainer: Tad Dallas <tdallas@ucdavis.edu>
-URL: http://github.com/rOpenSci/helminthR
-BugReports: http://github.com/rOpenSci/helminthR/issues
+URL: https://github.com/rOpenSci/helminthR
+BugReports: https://github.com/rOpenSci/helminthR/issues
 Description: helminthR: A programmatic interface to the London Natural History
     Museum's Host-Parasite database. The package currently allows you to
     query by host species, parasite species, and geographic location.
