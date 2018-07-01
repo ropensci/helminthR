@@ -21,25 +21,30 @@
 #' 
 
 listLocations <-function(){
-  locationUrl <- html(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/location.jsp?location=&paragroup=&showparasites=on&paraspecies=&fmhostgenus=Contains&fmparagenus=Starts+with&showrefs=on&fmsubgroup=Starts+with&groupby=parasite&pstatus=&showhosts=on&hostspecies=&hostgenus=&paragenus=&fmparaspecies=Starts+with&subgroup=&fmhostspecies=Contains&hstate=&getlocation=select"))
+  loc0 <- httr::GET(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/location.jsp?location=&paragroup=&showparasites=on&paraspecies=&fmhostgenus=Contains&fmparagenus=Starts+with&showrefs=on&fmsubgroup=Starts+with&groupby=parasite&pstatus=&showhosts=on&hostspecies=&hostgenus=&paragenus=&fmparaspecies=Starts+with&subgroup=&fmhostspecies=Contains&hstate=&getlocation=select"))
 
-  locations <- locationUrl %>%  
-             html_nodes("option") %>%
-             html_attr("value")
+	if(loc0$status_code != 200){
+		stop('Error: the NHM website is temporarily unreachable. Please try again.')
+	}
 
- if(any(locations == "")){
-   loc <- locations[-which(locations == "")]
- }
+	locations <- content(loc0, 'parsed') %>%  
+		html_nodes("option") %>%
+		html_attr("value")
 
- loc1 <- vector()
-  for(i in seq_len(length(loc))){
- 	 if(any(unlist(strsplit(loc[i],'')) == ":" )){
-		locTmp <- unlist(strsplit(loc[i], ':'))
-		loc1[i] <- trimws(locTmp[length(locTmp)])
-	 }else{
- 	   loc1[i] <- loc[i]
- 	 }
-   }
+	if(any(locations == "")){
+		loc <- locations[-which(locations == "")]
+	}
+
+	loc1 <- vector()
+	for(i in seq_len(length(loc))){
+		if(any(unlist(strsplit(loc[i],'')) == ":" )){
+			locTmp <- unlist(strsplit(loc[i], ':'))
+			loc1[i] <- trimws(locTmp[length(locTmp)])
+		}else{
+			loc1[i] <- loc[i]
+		}
+	}
+
   latLong <- geocode(loc1)
   ret <- data.frame(Location = loc1, Latitude = latLong[,1], 
 		Longitude = latLong[,2], stringsAsFactors = FALSE)

@@ -65,18 +65,15 @@ A vaule of NULL should be entered if you would like to include
 }
 \examples{
 
-\dontrun{gorillaParasites <- findHost('Gorilla', 'gorilla')}
+\dontrun{gorillaParasites <- findHost("Gorilla", "gorilla")}
 
 # An example of how to query multiple hosts when you have a 
 # vector of host species names
 
-hosts <- c('Gorilla gorilla', 'Peromyscus leucopus')
+hosts <- c("Gorilla gorilla", "Peromyscus leucopus")
 \dontrun{plyr::ldply(hosts, function(x)
-    {findHost(unlist(strsplit(x, ' '))[1], unlist(strsplit(x,' '))[2])})}
+    {findHost(unlist(strsplit(x, " "))[1], unlist(strsplit(x," "))[2])})}
 
-}
-\author{
-Tad Dallas
 }
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
@@ -85,4 +82,6 @@ Host-Parasite Database of the Natural History Museum, London.
 \seealso{
 \code{\link{findParasite}}
 }
-
+\author{
+Tad Dallas
+}

@@ -4,11 +4,15 @@
 \alias{findLocation}
 \title{Find host-parasite interactions for a given location}
 \usage{
-findLocation(location = NULL, citation = FALSE, hostState = NULL,
-  speciesOnly = FALSE, validateHosts = FALSE, removeDuplicates = FALSE)
+findLocation(location = NULL, group = NULL, citation = FALSE,
+  hostState = NULL, speciesOnly = FALSE, validateHosts = FALSE,
+  removeDuplicates = FALSE)
 }
 \arguments{
 \item{location}{Location of host-parasite interaction.}
+
+\item{group}{Parasite group - Cestodes, Acanthocephalans, Monogeneans, 
+Nematodes, Trematodes, or Turbellarian etc. (Turb)}
 
 \item{citation}{Boolean. Should the output include the citation link and 
 the number of supporting citations? default is FALSE}
@@ -50,11 +54,8 @@ Given a location (available from \code{\link{listLocations}} this function
 }
 \examples{
 
-\dontrun{ FrenchHostPars <- findLocation(location='France')}
+\dontrun{ FrenchHostPars <- findLocation(location="France")}
 
-}
-\author{
-Tad Dallas
 }
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
@@ -63,4 +64,6 @@ Host-Parasite Database of the Natural History Museum, London.
 \seealso{
 \code{\link{findHost}}
 }
-
+\author{
+Tad Dallas
+}

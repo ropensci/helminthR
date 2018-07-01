@@ -16,6 +16,8 @@
 #'  }
 #'
 #' @param location Location of host-parasite interaction.
+#' @param group Parasite group - Cestodes, Acanthocephalans, Monogeneans, 
+#'   Nematodes, Trematodes, or Turbellarian etc. (Turb)
 #' @param citation Boolean. Should the output include the citation link and 
 #'		the number of supporting citations? default is FALSE
 #' @param hostState number corresponding to one of six different host states. 
@@ -40,12 +42,12 @@
 #' @export
 #' @examples
 #'
-#' \dontrun{ FrenchHostPars <- findLocation(location='France')}
+#' \dontrun{ FrenchHostPars <- findLocation(location="France")}
 #'
 
-findLocation <- function(location = NULL, citation = FALSE, hostState = NULL,
-                         speciesOnly = FALSE, validateHosts = FALSE,
-                         removeDuplicates=FALSE){
+findLocation <- function(location = NULL, group = NULL, citation = FALSE, 
+	hostState = NULL, speciesOnly = FALSE, 
+	validateHosts = FALSE, removeDuplicates=FALSE){
   if(is.null(location)){
     stop("Please choose a location from the possible locations in the listLocations() function")
   }
@@ -60,46 +62,65 @@ findLocation <- function(location = NULL, citation = FALSE, hostState = NULL,
     location4 <- gsub(" ", "+", location3)
     location <- location4
 
-    hpUrl <- read_html(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?dbfnsRowsPerPage=50000&x=15&y=10&paragroup=&fmsubgroup=Starts+with&subgroup=&fmparagenus=Starts+with&paragenus=&fmparaspecies=Starts+with&paraspecies=&fmhostgenus=Contains&hostgenus=&fmhostspecies=Contains&hostspecies=&location=", location, "&hstate=", hostState, "&pstatus=&showparasites=on&showhosts=on&showrefs=on&groupby=parasite&search=Search", sep = ""))
+ 	hp <- httr::GET(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?dbfnsRowsPerPage=500000&x=13&y=5&paragroup=", group, "&fmsubgroup=&subgroup=&fmparagenus=&paragenus=&fmparaspecies=&paraspecies=&fmhostgenus=Contains&hostgenus=&fmhostspecies=Contains&hostspecies=&location=", location, "&hstate=", hostState, "&pstatus=&showparasites=on&showhosts=on&showrefs=on&groupby=parasite&search=Search", sep = ""))
 
-    names <- hpUrl %>% html_nodes(".searchlink") %>% html_text()
-    hpList <- matrix(names, ncol = 2, byrow = TRUE)
-    parNames <- vapply(hpList[, 1], strsplit, " ", FUN.VALUE=list(character(1)))
-    parNames2 <- lapply(parNames, function(a) {
-        if (length(a) < 2) {
-            return(a)
-        } else {
-            return(paste(a[1], a[2], sep = " "))
-        }
-    })
-    parNames3 <- lapply(parNames2, function(a) {
-        gsub("\\(|\\)", "", a)
-    })
-    names(parNames3) <- NULL
-    parNamesShort <- unlist(parNames3)
-    if(is.null(parNamesShort)){
-      warning('No records matched your request')
-      return(data.frame(Host = NA, Parasite = NA,
-                      ParasiteFull = NA))
-    }
-    if(citation == FALSE){
-    ret <- data.frame(Host = hpList[, 2], Parasite = parNamesShort,
-                      ParasiteFull = hpList[, 1], stringsAsFactors = FALSE)
-    }
+	
+	if(hp$status_code != 200){
+		stop("Error: the NHM website is temporarily unreachable. Please try again.")
+	}
 
-    if(citation){
-      citeLinks <- hpUrl %>% html_nodes("td~ td+ td a") %>% html_attr("href")
-      citeNumber <- hpUrl %>% html_nodes("td~ td+ td a") %>% html_text()
-      citeNumber <- plyr::laply(strsplit(citeNumber, ' '), 
-				function(x){as.numeric(x[1])})
-      citations <- paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/", citeLinks, sep='')
-      ret <- data.frame(Host = hpList[, 2], Parasite = parNamesShort,
-                      ParasiteFull = hpList[, 1],
-                      Reference = citations,
-                      CitationNumber = citeNumber, stringsAsFactors = FALSE)
-    }
+	hp2 <- content(hp, "parsed")
 
-    if(removeDuplicates){ret <- ret[!duplicated(ret[,1:2]), ]}
-    ret <- cleanData(ret, speciesOnly = speciesOnly , validateHosts = validateHosts)
-    return(ret)
+  names <- hp2 %>% 
+		html_nodes(".searchlink") %>% 
+		html_text()
+
+  hpList <- matrix(names, ncol = 2, byrow = TRUE)
+  parNames <- vapply(hpList[, 1], strsplit, " ", FUN.VALUE=list(character(1)))
+  parNames2 <- lapply(parNames, function(a) {
+		if (length(a) < 2) {
+			return(a)
+		} else {
+			return(paste(a[1], a[2], sep = " "))
+		}
+  })
+
+  parNames3 <- lapply(parNames2, function(a) {
+      gsub("\\(|\\)", "", a)
+  })
+  names(parNames3) <- NULL
+
+  parNamesShort <- unlist(parNames3)
+  if(is.null(parNamesShort)){
+    warning("No records matched your request")
+    return(data.frame(Host = NA, Parasite = NA,
+                    ParasiteFull = NA))
+  }
+
+  if(citation == FALSE){
+  ret <- data.frame(Host = hpList[, 2], 
+		Parasite = parNamesShort,
+		ParasiteFull = hpList[, 1], stringsAsFactors = FALSE)
+  }
+
+  if(citation){
+		citeLinks <- hp2 %>% html_nodes("td~ td+ td a") %>% html_attr("href")
+		citeNumber <- hp2 %>% html_nodes("td~ td+ td a") %>% html_text()
+		citeNumber <- plyr::laply(strsplit(citeNumber, " "), 
+			function(x){as.numeric(x[1])})
+		citations <- paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/", citeLinks, sep="")
+		ret <- data.frame(Host = hpList[, 2], Parasite = parNamesShort,
+			ParasiteFull = hpList[, 1],
+			Reference = citations,
+			CitationNumber = citeNumber, stringsAsFactors = FALSE)
+  }
+
+  if(removeDuplicates){
+		ret <- ret[!duplicated(ret[,1:2]), ]
+	}
+
+  ret <- cleanData(ret, speciesOnly = speciesOnly , 
+		validateHosts = validateHosts)
+
+  return(ret)
 }

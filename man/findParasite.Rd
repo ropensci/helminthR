@@ -62,17 +62,14 @@ was found
 }
 \examples{
 
-\dontrun{strongHosts <- findParasite(genus = 'Strongyloides')}
+\dontrun{strongHosts <- findParasite(genus = "Strongyloides")}
 
 # An example of how to query multiple parasite species when 
 # you have a vector of parasite species names
 
-parasites <- c('Ascaris aculeati', 'Oxyuris flagellum')
+parasites <- c("Ascaris aculeati", "Oxyuris flagellum")
 \dontrun{plyr::ldply(parasites, function(x){
-  findParasite(unlist(strsplit(x, ' '))[1], unlist(strsplit(x,' '))[2])})}
-}
-\author{
-Tad Dallas
+  findParasite(unlist(strsplit(x, " "))[1], unlist(strsplit(x," "))[2])})}
 }
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
@@ -81,4 +78,6 @@ Host-Parasite Database of the Natural History Museum, London.
 \seealso{
 \code{\link{findHost}}
 }
-
+\author{
+Tad Dallas
+}
