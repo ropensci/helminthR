@@ -1,23 +1,23 @@
 Package: helminthR
 Type: Package
 Title: Access London Natural History Museum Host-Helminth Record Database
-Version: 1.0.3
+Version: 1.0.4
 Author: Tad Dallas
 Imports:
     xml2,
     rvest,
+    httr,
     magrittr,
     plyr,
     ggmap,
     utils,
 		knitr,
-		rmarkdown,
-		igraph
+		rmarkdown
 Suggests:
     testthat,
     ggplot2,
 VignetteBuilder: knitr
-Maintainer: Tad Dallas <tdallas@ucdavis.edu>
+Maintainer: Tad Dallas <tad.a.dallas@gmail.com>
 URL: https://github.com/rOpenSci/helminthR
 BugReports: https://github.com/rOpenSci/helminthR/issues
 Description: helminthR: A programmatic interface to the London Natural History
@@ -26,4 +26,4 @@ Description: helminthR: A programmatic interface to the London Natural History
     There is no information on prevalence or intensity.
 License: GPL-3
 LazyData: yes
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
