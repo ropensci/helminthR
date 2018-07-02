@@ -11,7 +11,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom plyr ldply
 #' @importFrom xml2 read_html read_xml xml_attr xml_text xml_children xml_find_all
-#' @importFrom httr content
+#' @importFrom httr content GET stop_for_status
 #' @name helminthR-package
 #' @aliases helminthR
 #' @docType package

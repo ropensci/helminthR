@@ -62,8 +62,32 @@ findLocation <- function(location = NULL, group = NULL, citation = FALSE,
     location4 <- gsub(" ", "+", location3)
     location <- location4
 
- 	hp <- httr::GET(paste("http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp?dbfnsRowsPerPage=500000&x=13&y=5&paragroup=", group, "&fmsubgroup=&subgroup=&fmparagenus=&paragenus=&fmparaspecies=&paraspecies=&fmhostgenus=Contains&hostgenus=&fmhostspecies=Contains&hostspecies=&location=", location, "&hstate=", hostState, "&pstatus=&showparasites=on&showhosts=on&showrefs=on&groupby=parasite&search=Search", sep = ""))
 
+  url <- "http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp"
+
+  args <- list(dbfnsRowsPerPage='500000', 
+    x='13', y='5',
+    paragroup=group, 
+    fmsubgroup=NULL,
+    subgroup=NULL,
+    fmparagenus=NULL,
+    paragenus=NULL,
+    fmparaspecies=NULL,
+    paraspecies=NULL,
+    fmhostgenus='Contains',
+    hostgenus=NULL, 
+    fmhostspecies='Contains',
+    hostspecies=NULL,
+    location=location,
+    hstate=hostState,
+    pstatus=NULL,
+    showparasites='on',
+    showhosts='on',
+    showrefs='on',
+    groupby='parasite',
+    search='Search')
+  hp <- GET(url, query = args)
+  stop_for_status(hp) 
 	
 	if(hp$status_code != 200){
 		stop("Error: the NHM website is temporarily unreachable. Please try again.")
