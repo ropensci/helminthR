@@ -124,7 +124,7 @@ findParasite <- function(genus = NULL, species = NULL,
 		if (length(a) < 2) {
 			return(a)
 		}
-		if(any(grepl(".*\\[(.*)\\].*", a))){
+		if(any(grepl(".*\\[(.*)\\].*", a)) | any(grepl(".*\\(.*\\).*", a))){
 			return(paste(a[1], a[3], sep= " "))
 		}else{
 			return(paste(a[1], a[2], sep = " "))
