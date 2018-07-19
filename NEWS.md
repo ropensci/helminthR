@@ -1,4 +1,4 @@
-helminthR 1.0.3
+helminthR 1.0.5
 ==============
 
 ### NEW FEATURES
