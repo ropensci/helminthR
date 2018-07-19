@@ -56,7 +56,7 @@ using the \code{\link{listLocations}} function.
 	\item (6) "Accidental infestation"
  }
 
-A vaule of NULL should be entered if you would like to include 
+A value of NULL should be entered if you would like to include 
 	all hostStates.
 
 \code{parGroup} can be specified as "Acanthocephalans", "Cestodes",
