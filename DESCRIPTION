@@ -1,7 +1,7 @@
 Package: helminthR
 Type: Package
 Title: Access London Natural History Museum Host-Helminth Record Database
-Version: 1.0.4
+Version: 1.0.5
 Author: Tad Dallas
 Imports:
     xml2,
@@ -11,8 +11,8 @@ Imports:
     plyr,
     ggmap,
     utils,
-		knitr,
-		rmarkdown
+    knitr,
+    rmarkdown
 Suggests:
     testthat,
     ggplot2,
@@ -20,7 +20,7 @@ VignetteBuilder: knitr
 Maintainer: Tad Dallas <tad.a.dallas@gmail.com>
 URL: https://github.com/rOpenSci/helminthR
 BugReports: https://github.com/rOpenSci/helminthR/issues
-Description: helminthR: A programmatic interface to the London Natural History
+Description: This package provides a programmatic interface to the London Natural History
     Museum's Host-Parasite database. The package currently allows you to
     query by host species, parasite species, and geographic location.
     There is no information on prevalence or intensity.

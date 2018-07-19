@@ -1,7 +1,7 @@
 ## Test environments
 
-* ubuntu 16.04, R 3.3.2
-* ubuntu 12.04 (on travis-ci), R 3.4.1
+* ubuntu 16.04, R 3.4.4 (local machine)
+* ubuntu 14.04, R 3.5.0 (travis ci)
 * win-builder (devel and release)
 
 
