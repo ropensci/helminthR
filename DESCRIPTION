@@ -20,10 +20,12 @@ VignetteBuilder: knitr
 Maintainer: Tad Dallas <tad.a.dallas@gmail.com>
 URL: https://github.com/rOpenSci/helminthR
 BugReports: https://github.com/rOpenSci/helminthR/issues
-Description: This package provides a programmatic interface to the London Natural History
-    Museum's Host-Parasite database. The package currently allows you to
-    query by host species, parasite species, and geographic location.
-    There is no information on prevalence or intensity.
+Description: Access to large host-parasite data is often hampered by the 
+  availability of data and difficulty in obtaining it in a programmatic way
+  to encourage analyses. helminthR provides a programmatic interface to the 
+  London Natural History Museum's Host-Parasite database, one of the largest 
+  host-parasite databases existing currently. The package allows the user
+  to query by host species, parasite species, and geographic location.
 License: GPL-3
 LazyData: yes
 RoxygenNote: 6.0.1
