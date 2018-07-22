@@ -23,7 +23,7 @@ BugReports: https://github.com/rOpenSci/helminthR/issues
 Description: Access to large host-parasite data is often hampered by the 
   availability of data and difficulty in obtaining it in a programmatic way
   to encourage analyses. 'helminthR' provides a programmatic interface to the 
-  London Natural History Museum's Host-Parasite database, one of the largest 
+  London Natural History Museum's host-parasite database, one of the largest 
   host-parasite databases existing currently. The package allows the user
   to query by host species, parasite species, and geographic location.
 License: GPL-3

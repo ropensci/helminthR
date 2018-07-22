@@ -1,6 +1,7 @@
 #' @title Access London Natural History Museum host-helminth record database
 #'
-#' @description 'helminthR': A programmatic interface to the London Natural History Museum's Host-Parasite database.
+#' @description 'helminthR': A programmatic interface to the London 
+#'   Natural History Museum's host-parasite database.
 #'
 #' The package currently allows you to query by host species, parasite species, 
 #' and geographic location. No information is provided on parasite prevalence or intensity. 
@@ -15,6 +16,6 @@
 #' @name helminthR-package
 #' @aliases helminthR
 #' @docType package
-#' @author Tad Dallas \email{tdallas@@ucdavis.edu}
+#' @author Tad Dallas \email{tad.a.dallas@@gmail.com}
 
 NULL
