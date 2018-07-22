@@ -53,9 +53,7 @@ Given a location (available from \code{\link{listLocations}} this function
  }
 }
 \examples{
-
-\dontrun{ FrenchHostPars <- findLocation(location="France")}
-
+\donttest{ FrenchHostPars <- helminthR::findLocation(location="France")}
 }
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).

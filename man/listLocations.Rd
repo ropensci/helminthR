@@ -19,9 +19,7 @@ of the country's centroid. The georeferencing is performed dynamically using
 \code{ggmap} and is potentially incorrect.
 }
 \examples{
-
-\dontrun{listLocations()}
-
+\donttest{helminthR::listLocations()}
 }
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).

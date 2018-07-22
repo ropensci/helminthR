@@ -52,14 +52,14 @@
 #' @export
 #' @examples
 #'
-#' \dontrun{gorillaParasites <- findHost("Gorilla", "gorilla")}
+#' \donttest{gorillaParasites <- helminthR::findHost("Gorilla", "gorilla")}
 #'
 #' # An example of how to query multiple hosts when you have a 
 #' # vector of host species names
 #'
 #' hosts <- c("Gorilla gorilla", "Peromyscus leucopus")
-#' \dontrun{plyr::ldply(hosts, function(x)
-#'     {findHost(unlist(strsplit(x, " "))[1], unlist(strsplit(x," "))[2])})}
+#' \donttest{plyr::ldply(hosts, function(x)
+#'     {helminthR::findHost(unlist(strsplit(x, " "))[1], unlist(strsplit(x," "))[2])})}
 #'
 
 

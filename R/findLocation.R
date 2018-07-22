@@ -41,9 +41,8 @@
 #' Host-Parasite Database of the Natural History Museum, London.
 #' @export
 #' @examples
-#'
-#' \dontrun{ FrenchHostPars <- findLocation(location="France")}
-#'
+#' \donttest{ FrenchHostPars <- helminthR::findLocation(location="France")}
+
 
 findLocation <- function(location = NULL, group = NULL, citation = FALSE, 
 	hostState = NULL, speciesOnly = FALSE, 

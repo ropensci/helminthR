@@ -16,9 +16,8 @@
 #' Host-Parasite Database of the Natural History Museum, London. 
 #'
 #' @examples
-#' 
-#' \dontrun{listLocations()}
-#' 
+#' \donttest{helminthR::listLocations()}
+
 
 listLocations <-function(){
 
