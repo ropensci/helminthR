@@ -42,7 +42,8 @@
 #' @author Tad Dallas
 #' @seealso \code{\link{findHost}}
 #' @references Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
-#' Host-Parasite Database of the Natural History Museum, London.
+#' Host-Parasite Database of the Natural History Museum, London. 
+#' <http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/>
 #' @export
 #' @examples
 #'

@@ -12,6 +12,11 @@
 The package currently allows you to query by host species, parasite species, 
 and geographic location. No information is provided on parasite prevalence or intensity.
 }
+\references{
+Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
+Host-Parasite Database of the Natural History Museum, London. 
+<http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/>
+}
 \author{
 Tad Dallas \email{tad.a.dallas@gmail.com}
 }

@@ -6,6 +6,10 @@
 #' The package currently allows you to query by host species, parasite species, 
 #' and geographic location. No information is provided on parasite prevalence or intensity. 
 #'
+#' @references Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
+#' Host-Parasite Database of the Natural History Museum, London. 
+#' <http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/>
+#'
 #' @importFrom utils tail globalVariables
 #' @importFrom ggmap geocode
 #' @importFrom rvest html html_nodes html_text html_attr

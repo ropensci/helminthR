@@ -19,11 +19,12 @@ of the country's centroid. The georeferencing is performed dynamically using
 \code{ggmap} and is potentially incorrect.
 }
 \examples{
-\donttest{helminthR::listLocations()}
+\dontrun{helminthR::listLocations()}
 }
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
-Host-Parasite Database of the Natural History Museum, London.
+Host-Parasite Database of the Natural History Museum, London. 
+<http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/>
 }
 \author{
 Tad Dallas
