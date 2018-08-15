@@ -13,14 +13,17 @@ R CMD check results
 
 ## Reverse dependencies
 
-This is a new package, there are no reverse dependencies.
+There are no reverse dependencies
+
 
 ---
 
-This is a new release. I have read and agree to the the CRAN
+I have read and agree to the the CRAN
 policies at https://cran.r-project.org/web/packages/policies.html
 
-URL added for database website. Examples are still labeled as `donttest`, as occasional hosting errors will throw invalid gateway errors, and the tests may take too long to complete.
+This is an update to the package, as a bug affecting 3 of the main functions
+related to `location` string formation was causing trouble. I apologize for the
+update so close to the new release. 
 
 Thanks!
 Tad Dallas

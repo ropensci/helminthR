@@ -1,7 +1,7 @@
 Package: helminthR
 Type: Package
 Title: Access London Natural History Museum Host-Helminth Record Database
-Version: 1.0.5
+Version: 1.0.6
 Author: Tad Dallas
 Imports:
     xml2,
