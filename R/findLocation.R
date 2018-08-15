@@ -56,13 +56,11 @@ findLocation <- function(location = NULL, group = NULL, citation = FALSE,
     stop("Please choose a location from the possible locations in the listLocations() function")
     }
 
-    location1 <- gsub("\\+", "%2B", location)
-    location2 <- gsub("\\(", "%28", location1)
-    location3 <- gsub("\\)", "%29", location2)
-    location4 <- gsub(" ", "+", location3)
-    location <- location4
-
-
+#    location1 <- gsub("\\+", "%2B", location)
+#    location2 <- gsub("\\(", "%28", location1)
+#    location3 <- gsub("\\)", "%29", location2)
+#    location4 <- gsub(" ", "+", location3)
+#    location <- location4
   url <- "http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp"
 
   args <- list(dbfnsRowsPerPage='500000', 

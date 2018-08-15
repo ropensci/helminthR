@@ -72,14 +72,8 @@ findHost <- function(genus = NULL, species = NULL, location = NULL,
         stop("Please choose a location from the possible 
 					locations in the listLocations() function")
      }
-     if (location != "") {
-       location1 <- gsub("\\+", "%2B", location)
-       location2 <- gsub("\\(", "%28", location1)
-       location3 <- gsub("\\)", "%29", location2)
-       location4 <- gsub(" ", "+", location3)
-       location <- location4
-     }
    }
+
   if(is.null(parGroup)){parGroup <- ""}
   url <- "http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp"
 
