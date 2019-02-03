@@ -41,8 +41,8 @@ Three (or five) column data.frame containing host species,
 }
 \description{
 Given a host genus, species, and/or location, returns a list of parasite
-occurrences on that host or for that location. Search available locations
-using the \code{\link{listLocations}} function.
+occurrences on that host or for that location. 
+Use \code{data(locations)} for a list of possible locations.
 }
 \details{
 \code{hostState} can take values 1-6 corresponding to if the recorded host 

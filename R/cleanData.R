@@ -4,7 +4,7 @@
 #' provide further taxonomic information (thanks to \code{taxize}), 
 #' and remove records only to genus level.
 #'
-#' Use the \code{\link{listLocations}} function for a list of possible locations.
+#' Use \code{data(locations)} for a list of possible locations.
 #'
 #' @param edge Host-parasite edgelist obtained from \code{\link{findLocation}},
 #'        \code{\link{findHost}}, or \code{\link{findParasite}}
@@ -27,6 +27,13 @@ cleanData <- function (edge, speciesOnly = FALSE, validateHosts = FALSE){
     if (length(grep("sp\\.", edge$Parasite)) > 0) {
       edge <- edge[-grep(" sp\\.", edge$Parasite), ]
     }
+    if (length(grep("spp\\.", edge$Host)) > 0) {
+      edge <- edge[-grep(" spp\\.", edge$Host), ]
+    }
+    if (length(grep("spp\\.", edge$Parasite)) > 0) {
+      edge <- edge[-grep(" spp\\.", edge$Parasite), ]
+    }
+
     if (length(grep(".*\\((.*)\\).*", edge$Host)) > 0) {
       edge <- edge[-grep(".*\\((.*)\\).*", edge$Host), ]
     }

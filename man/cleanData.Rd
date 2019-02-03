@@ -26,7 +26,7 @@ provide further taxonomic information (thanks to \code{taxize}),
 and remove records only to genus level.
 }
 \details{
-Use the \code{\link{listLocations}} function for a list of possible locations.
+Use \code{data(locations)} for a list of possible locations.
 }
 \author{
 Tad Dallas

@@ -5,8 +5,9 @@
 \title{Find host-parasite interactions for a given parasite species.}
 \usage{
 findParasite(genus = NULL, species = NULL, group = NULL,
-  subgroup = NULL, location = NULL, citation = FALSE, hostState = NULL,
-  speciesOnly = FALSE, validateHosts = FALSE, removeDuplicates = FALSE)
+  subgroup = NULL, location = NULL, citation = FALSE,
+  hostState = NULL, speciesOnly = FALSE, validateHosts = FALSE,
+  removeDuplicates = FALSE)
 }
 \arguments{
 \item{genus}{Parasite genus}
@@ -46,7 +47,7 @@ Three (or five) column data.frame containing host species,
 \description{
 Given a host genus and/or species, this function returns a matrix containing
 host-parasite interaction data. Search available locations using 
-the \code{\link{listLocations}} function.
+\code{data(locations)}.
 }
 \details{
 \code{hostState} can take values 1-6 corresponding to if the recorded host 

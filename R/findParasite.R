@@ -2,7 +2,7 @@
 #'
 #' Given a host genus and/or species, this function returns a matrix containing
 #' host-parasite interaction data. Search available locations using 
-#' the \code{\link{listLocations}} function.
+#' \code{data(locations)}.
 #'
 #' \code{hostState} can take values 1-6 corresponding to if the recorded host 
 #' was found 
@@ -78,8 +78,8 @@ findParasite <- function(genus = NULL, species = NULL,
 
   if(!is.null(location)){
     if(location %in% locations[,1] == FALSE) {
-      stop("Please choose a location from the possible locations in the 
-        listLocations() function")
+        stop("Please choose a location from the possible 
+					locations... data(locations)")
     }
   }
   url <- "http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/database/results.jsp"

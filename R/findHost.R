@@ -1,8 +1,8 @@
 #' Find parasite occurrence data for given host.
 #'
 #' Given a host genus, species, and/or location, returns a list of parasite
-#' occurrences on that host or for that location. Search available locations
-#' using the \code{\link{listLocations}} function.
+#' occurrences on that host or for that location. 
+#' Use \code{data(locations)} for a list of possible locations.
 #'
 #'
 #' \code{hostState} can take values 1-6 corresponding to if the recorded host 
@@ -70,7 +70,7 @@ findHost <- function(genus = NULL, species = NULL, location = NULL,
    if(!is.null(location)){
      if (location %in% locations[,1] == FALSE) {
         stop("Please choose a location from the possible 
-					locations in the listLocations() function")
+					locations... data(locations)")
      }
    }
 
