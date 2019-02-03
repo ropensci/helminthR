@@ -36,7 +36,7 @@
 #'
 #' @return Three (or five) column data.frame containing host species, 
 #'   parasite species (shortened name and full name), and citation link and 
-#'   number of citations (if `citation`=TRUE), with each row corresponding 
+#'   number of citations (if \code{citation = TRUE}), with each row corresponding 
 #'   to an occurrence of a parasite species on a host species.
 #'
 #' @author Tad Dallas

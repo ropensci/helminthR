@@ -82,7 +82,7 @@ install.packages("helminthR")
 
 ## Package functionality
 
-The package allows for the acquisition of host-helminth interaction records based on host name (genus or species), parasite name (genus, species, or group), and/or location (accepted region name as provided by the `listLocations()` function. Parasite groups include "Acanthocephalans", "Cestodes", "Monogeans", "Nematodes", "Trematodes", or "Turbs" (short for Turbellarians). The user can further define host species as occuring 
+The package allows for the acquisition of host-helminth interaction records based on host name (genus or species), parasite name (genus, species, or group), and/or location (accepted region name as provided in `data(locations)`. Parasite groups include "Acanthocephalans", "Cestodes", "Monogeans", "Nematodes", "Trematodes", or "Turbs" (short for Turbellarians). The user can further define host species as occuring 
 
 1. "In the wild"
 2. "Zoo captivity" 
@@ -154,9 +154,9 @@ head(strongHosts)
 
 
 
-### `listLocations()` and `findLocation()`
+### `data(locations)` and `findLocation()`
 
-List all location names (`listLocations()`). These names can be given to the `findLocation()` function, which finds all host-parasite associations that have occurred in the given location. Below, I look at host-parasite associations recorded in France.
+A data file containing all the location names that can be queried, along with putative latitude and longitude coordinates for the centroid of each location can be found in `data(locations)`. Note that this will replace any object in the global environment named `locations`. These names can be given to the `findLocation()` function, which finds all host-parasite associations that have occurred in the given location. Below, I look at host-parasite associations recorded in France.
 
 
 ```{r eval=FALSE}

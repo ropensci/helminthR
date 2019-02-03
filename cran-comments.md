@@ -1,6 +1,6 @@
 ## Test environments
 
-* ubuntu 16.04, R 3.4.4 (local machine)
+* ubuntu 18.04, R 3.5.2 (local machine)
 * ubuntu 14.04, R 3.5.0 (travis ci)
 * win-builder (devel and release)
 
@@ -21,9 +21,8 @@ There are no reverse dependencies
 I have read and agree to the the CRAN
 policies at https://cran.r-project.org/web/packages/policies.html
 
-This is an update to the package, as a bug affecting 3 of the main functions
-related to `location` string formation was causing trouble. I apologize for the
-update so close to the new release. 
+This is an update to the package to remove the ggmap dependency and provide a small bugfix to the cleanData function for removing species identified only to genus. I have also removed the ` symbols in place of ' symbols or code text in the documentation.
+
 
 Thanks!
 Tad Dallas

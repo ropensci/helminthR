@@ -17,7 +17,7 @@ Lists geographic locations that can be input to \code{\link{findHost}} or
 \code{\link{findParasite}} and the corresponding latitude and longitude coordinates 
 of the country's centroid. The georeferencing was performed dynamically using the 
 Google Maps API, but they have since restricted access. The data on locations is now
-provided in this data file called `locations` -- `data(locations)` -- and is based on 
+provided in this data file called \code{locations} -- \code{data(locations)} -- and is based on 
 an earlier usage of \code{ggmap}. The geographic coordinates may not be accurate, and users
 should check for accuracy (and feel free to file an issue or PR on Github with corrections).
 }

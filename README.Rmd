@@ -60,9 +60,9 @@ str(strongHosts)
 
 
 
-#### `listLocations()` and `findLocation()`
+### `data(locations)` and `findLocation()`
 
-List all location names (`listLocations()`). These names can be given to the `findLocation()` function, which finds all host-parasite associations that have occurred in the given location. Below, I look at host-parasite associations recorded in France.
+A data file containing all the location names that can be queried, along with putative latitude and longitude coordinates for the centroid of each location can be found in `data(locations)`. Note that this will replace any object in the global environment named `locations`. These names can be given to the `findLocation()` function, which finds all host-parasite associations that have occurred in the given location. Below, I look at host-parasite associations recorded in France.
 
 
 ```{r eval=FALSE}
