@@ -16,7 +16,7 @@ Suggests:
     testthat
 VignetteBuilder: knitr
 Maintainer: Tad Dallas <tad.a.dallas@gmail.com>
-URL: https://github.com/rOpenSci/helminthR
+URL: https://docs.ropensci.org/helminthR, https://github.com/rOpenSci/helminthR
 BugReports: https://github.com/rOpenSci/helminthR/issues
 Description: Access to large host-parasite data is often hampered by the 
   availability of data and difficulty in obtaining it in a programmatic way
