@@ -10,7 +10,7 @@
 #' @author Anna Willoughby
 
 library(xml2)
-library(purrr)
+library(dplyr)
 library(rvest)
 
 # input needs to be data.frame with Reference urls in column 4
@@ -27,7 +27,7 @@ findCitations <- function(interactions = NULL){
     cdf$variable <- NULL # remove column
     ref_df <- rbind(ref_df, cdf) # add to final dataframes
     }
-  ref_df %<>% unique() # remove duplicates
+  ref_df <- unique(ref_df) # remove duplicates
   return(ref_df)
 }
 
