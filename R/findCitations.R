@@ -8,11 +8,6 @@
 #'
 #' @author Anna Willoughby
 
-library(xml2)
-library(rvest)
-library(tidyr)
-library(reshape2)
-
 # input needs to be data.frame with Reference urls in column 4 and Citation count in column 5
 findCitations <- function(interactions = NULL){
   ref_list <- list() # prepare a container
@@ -25,7 +20,7 @@ findCitations <- function(interactions = NULL){
     cdf <- cdf[which(is.na(str_extract(cdf$variable, "\\d")) == TRUE),]
     cdf <- cdf[,c(1,2,3)] # only keep columns of interest
     cdf$ref_id <- as.integer(substr(cdf$ref_id, 1, nchar(cdf$ref_id)-1)) # extract out count number
-    cdf <- fill(cdf, ref_id) # fill in ref_id, relies on tidyr
+    cdf <- fill(cdf, ref_id) # fill in ref_id
     cdf <- dcast(cdf, ref_id ~ variable, fill = "", drop = FALSE, value.var = "value") # transform to see all metadata
     tmp <- cdf$`Reference:` # select just the references
     tmp <- gsub("\r|\n", "", tmp) # clean up references
