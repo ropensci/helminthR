@@ -27,6 +27,7 @@ findCitations <- function(interactions = NULL, original = FALSE){
       cdf <- dcast(cdf, ref_id ~ variable, fill = "", drop = FALSE, value.var = "value") # transform to see all metadata
       tmp <- cdf$Reference # select just the references
       tmp <- gsub("\r|\n", "", tmp) # clean up references
+      tmp <- gsub("                                                    ", "", tmp)# clean up references
       name <- paste('interaction_',i,'_references', sep='')
       ref_list[[name]] <- tmp # add to final dataframes
     }
@@ -55,6 +56,7 @@ findCitations <- function(interactions = NULL, original = FALSE){
       cdf <- cdf[which(cdf$Comments != "Not original, Mexican National Collections"),]
       tmp <- cdf$Reference # select just the references
       tmp <- gsub("\r|\n", "", tmp) # clean up references
+      tmp <- gsub("                                                    ", "", tmp)# clean up references
       name <- paste('interaction_',i,'_references', sep='')
       ref_list[[name]] <- tmp # add to final dataframes
     }
