@@ -2,10 +2,9 @@
 #'
 #' Given a previous query of host, parasite, or location host-parasite occurences, returns a list of citations.
 #'
-#' @param interactions Interaction dataframe from previous query (findLocation, findParasite, or findHost)
-
+#' @param interactions Interaction dataframe from previous query (findLocation, findParasite, or findHost) that had citations = TRUE
 #'
-#' @return One column data.frame containing primary literature citation as provided by LMNH
+#' @return list of lists containing primary literature citation per interaction as provided by LMNH
 #'
 #' @author Anna Willoughby
 
@@ -25,10 +24,10 @@ findCitations <- function(interactions = NULL){
     names(cdf) <- c("ref_id", "variable", "value") # name columns
     cdf <- cdf[which(is.na(str_extract(cdf$variable, "\\d")) == TRUE),]
     cdf <- cdf[,c(1,2,3)] # only keep columns of interest
-    cdf$ref_id <- str_extract(cdf$ref_id, "\\d")
+    cdf$ref_id <- as.integer(substr(cdf$ref_id, 1, nchar(cdf$ref_id)-1)) # extract out count number
     cdf <- fill(cdf, ref_id) # fill in ref_id, relies on tidyr
-    cdf <- dcast(cdf, ref_id ~ variable, fill = "", drop = FALSE, value.var = "value")
-    tmp <- cdf$`Reference:`
+    cdf <- dcast(cdf, ref_id ~ variable, fill = "", drop = FALSE, value.var = "value") # transform to see all metadata
+    tmp <- cdf$`Reference:` # select just the references
     tmp <- gsub("\r|\n", "", tmp) # clean up references
     name <- paste('interaction_',i,'_references', sep='')
     ref_list[[name]] <- tmp # add to final dataframes
