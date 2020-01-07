@@ -24,8 +24,8 @@ findCitations <- function(interactions = NULL, original = FALSE){
       cdf$ref_id <- as.integer(substr(cdf$ref_id, 1, nchar(cdf$ref_id)-1)) # extract out count number
       cdf$variable <- substr(cdf$variable, 1, nchar(cdf$variable)-1) # remove colon
       cdf <- fill(cdf, ref_id) # fill in ref_id
-      cdf <- dcast(cdf, ref_id ~ variable, fill = "", drop = FALSE, value.var = "value") # transform to see all metadata
-      tmp <- cdf$Reference # select just the references
+      cdf <- cdf[which(cdf$variable == "Reference"),] # filter to only rows of reference 
+      tmp <- cdf$value # select just the references
       tmp <- gsub("\r|\n", "", tmp) # clean up references
       tmp <- gsub("                                                    ", "", tmp)# clean up references
       name <- paste('interaction_',i,'_references', sep='')
@@ -47,12 +47,14 @@ findCitations <- function(interactions = NULL, original = FALSE){
       cdf$variable <- substr(cdf$variable, 1, nchar(cdf$variable)-1) # remove colon
       cdf <- fill(cdf, ref_id) # fill in ref_id
       cdf <- dcast(cdf, ref_id ~ variable, fill = "", drop = FALSE, value.var = "value") # transform to see all metadata
-      cdf <- mutate(cdf, Comments = ifelse(is.null(cdf$Comments) == TRUE,"", cdf$Comments))
+      cdf <- mutate(cdf, Comments = ifelse(is.null(cdf$Comments) == TRUE,"", cdf$Comments)) # create a comments column if doesn't exist
       cdf <- cdf[which(cdf$Comments != "not original"),]
       cdf <- cdf[which(cdf$Comments != "Not original"),]
       cdf <- cdf[which(cdf$Comments != "not original, epidemiology reviewed"),]
       cdf <- cdf[which(cdf$Comments != "systematics"),]
       cdf <- cdf[which(cdf$Comments != "larvae, not original"),]
+      cdf <- cdf[which(cdf$Comments != "Larvae, not original"),]
+      cdf <- cdf[which(cdf$Comments != "life cycle and distribution reviewed"),]
       cdf <- cdf[which(cdf$Comments != "Not original, Mexican National Collections"),]
       tmp <- cdf$Reference # select just the references
       tmp <- gsub("\r|\n", "", tmp) # clean up references
