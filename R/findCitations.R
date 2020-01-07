@@ -19,7 +19,7 @@ findCitations <- function(interactions = NULL, original = FALSE){
       cdtble <- html_node(webpage, "table") # extract reference table from webpage
       cdf <- html_table(cdtble, fill = TRUE) # convert to dataframe
       names(cdf) <- c("ref_id", "variable", "value") # name columns
-      cdf <- cdf[which(is.na(str_extract(cdf$variable, "\\d")) == TRUE),]
+      cdf <- cdf[which(nchar(cdf$variable)>4),] # remove rows with variable = digit
       cdf <- cdf[,c(1,2,3)] # only keep columns of interest
       cdf$ref_id <- as.integer(substr(cdf$ref_id, 1, nchar(cdf$ref_id)-1)) # extract out count number
       cdf$variable <- substr(cdf$variable, 1, nchar(cdf$variable)-1) # remove colon
@@ -41,7 +41,7 @@ findCitations <- function(interactions = NULL, original = FALSE){
       cdtble <- html_node(webpage, "table") # extract reference table from webpage
       cdf <- html_table(cdtble, fill = TRUE) # convert to dataframe
       names(cdf) <- c("ref_id", "variable", "value") # name columns
-      cdf <- cdf[which(is.na(str_extract(cdf$variable, "\\d")) == TRUE),]
+      cdf <- cdf[which(nchar(cdf$variable)>4),] # remove rows with variable = digit
       cdf <- cdf[,c(1,2,3)] # only keep columns of interest
       cdf$ref_id <- as.integer(substr(cdf$ref_id, 1, nchar(cdf$ref_id)-1)) # extract out count number
       cdf$variable <- substr(cdf$variable, 1, nchar(cdf$variable)-1) # remove colon
