@@ -8,6 +8,10 @@
 #' @return list of lists containing primary literature citation per interaction as provided by LMNH
 #'
 #' @author Anna Willoughby
+#' @examples
+#'
+#' \donttest{gorillaParasites <- helminthR::findHost("Gorilla", "gorilla", citation = TRUE)}
+#' \donttest{findCitations(gorillaParasites)}
 
 # input needs to be data.frame with Reference urls in column 4 and Citation count in column 5
 findCitations <- function(interactions = NULL, original = FALSE){
@@ -28,7 +32,9 @@ findCitations <- function(interactions = NULL, original = FALSE){
       tmp <- cdf$value # select just the references
       tmp <- gsub("\r|\n", "", tmp) # clean up references
       tmp <- gsub("                                                    ", "", tmp)# clean up references
-      name <- paste('interaction_',i,'_references', sep='')
+      host <- interactions$Host[i]
+      parasite <- interactions$Parasite[i]
+      name <- paste(host,"-", parasite," Citations", sep='')
       ref_list[[name]] <- tmp # add to final dataframes
     }
     return(ref_list) }
@@ -46,7 +52,7 @@ findCitations <- function(interactions = NULL, original = FALSE){
       cdf$ref_id <- as.integer(substr(cdf$ref_id, 1, nchar(cdf$ref_id)-1)) # extract out count number
       cdf$variable <- substr(cdf$variable, 1, nchar(cdf$variable)-1) # remove colon
       cdf <- fill(cdf, ref_id) # fill in ref_id
-      cdf <- spread(cdf, variable, value) # transform to see all metadata
+      cdf <- pivot_wider(cdf, variable, value) # transform to see all metadata
       cdf <- mutate(cdf, Comments = ifelse(is.null(cdf$Comments) == TRUE,"", cdf$Comments)) # create a comments column if doesn't exist
       cdf <- cdf[which(cdf$Comments != "not original"),]
       cdf <- cdf[which(cdf$Comments != "Not original"),]
@@ -58,8 +64,10 @@ findCitations <- function(interactions = NULL, original = FALSE){
       cdf <- cdf[which(cdf$Comments != "Not original, Mexican National Collections"),]
       tmp <- cdf$Reference # select just the references
       tmp <- gsub("\r|\n", "", tmp) # clean up references
-      tmp <- gsub("                                                    ", "", tmp)# clean up references
-      name <- paste('interaction_',i,'_references', sep='')
+      tmp <- gsub("                                                    ", "", tmp) # clean up references
+      host <- interactions$Host[i]
+      parasite <- interactions$Parasite[i]
+      name <- paste(host,"-", parasite," Citations", sep='')
       ref_list[[name]] <- tmp # add to final dataframes
     }
     return(ref_list) }
