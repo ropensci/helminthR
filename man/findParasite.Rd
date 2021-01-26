@@ -4,10 +4,18 @@
 \alias{findParasite}
 \title{Find host-parasite interactions for a given parasite species.}
 \usage{
-findParasite(genus = NULL, species = NULL, group = NULL,
-  subgroup = NULL, location = NULL, citation = FALSE,
-  hostState = NULL, speciesOnly = FALSE, validateHosts = FALSE,
-  removeDuplicates = FALSE)
+findParasite(
+  genus = NULL,
+  species = NULL,
+  group = NULL,
+  subgroup = NULL,
+  location = NULL,
+  citation = FALSE,
+  hostState = NULL,
+  speciesOnly = FALSE,
+  validateHosts = FALSE,
+  removeDuplicates = FALSE
+)
 }
 \arguments{
 \item{genus}{Parasite genus}
