@@ -43,56 +43,19 @@ cleanData <- function (edge, speciesOnly = FALSE, validateHosts = FALSE){
   }
 
   if (validateHosts) {
-    validate <- function(hostName) {
-      hostName <- as.character(hostName)
-      if (length(grep("sp\\.", hostName)) == 1) {
-	      hostName2 <- unlist(strsplit(hostName, " "))[1]
-      }else{
-	      hostName2 <- unlist(strsplit(hostName, " "))[1:2]
-      }
-      rootClife <- read_xml(paste("http://www.catalogueoflife.org/col/webservice?name=",
-      hostName2[1], "&response=full", sep = ""))
-      if (xml_attr(rootClife, "number_of_results_returned") == 0) {
-        ret <- rep(NA,8)
-        names(ret) <- c("Kingdom", "Phylum", "Class", "Order",
-        "Superfamily", "Family", "Genus", "Subgenus")
-      }else{
-        for(i in seq_len(length(xml_children(rootClife)))){
-          taxInfo <- xml_text(xml_find_all(xml_children(rootClife)[i],
-            "classification/taxon/name"))
-          names(taxInfo) <- xml_text(xml_find_all(xml_children(rootClife)[i],
-	          "classification/taxon/rank"))
-        	if(any(names(taxInfo) == "Genus")&&taxInfo["Genus"]==hostName2[1]){
-        	  ret <- taxInfo
-            break
-          }
-        }
-      }
-      if(length(taxInfo) == 0 | taxInfo['Genus'] != hostName2[1]){
-        ret <- rep(NA,8)
-        names(ret) <- c("Kingdom", "Phylum", "Class", "Order",
-          "Superfamily", "Family", "Genus", "Subgenus")
-      }
-      return(ret)
-    }
-
-    taxMat <- matrix(NA, ncol = 8, nrow = nrow(edge))
-    colnames(taxMat) <- c("Kingdom", "Phylum", "Class", "Order",
-      "Superfamily", "Family", "Genus", "Subgenus")
-    for(q in seq_len(nrow(edge))){
-      temp <- validate(edge$Host[q])
-      taxMat[q, which(names(temp) %in% colnames(taxMat))] <- unlist(temp)
-    }
-    if(any(apply(taxMat, 1, function(x){all(is.na(x))}))){
-      rmv <- which(apply(taxMat, 1, 
-        function(x){
-          all(is.na(x))
-        })
-      )
-      taxMat <- taxMat[-rmv, ]
-      edge <- edge[-rmv, ]
-    }
-    return(list(HPedge = edge, HostTaxon = taxMat))
+		tax <- taxize::classification(edge$Host, db='ncbi')
+		tax2 <- tax[!is.na(tax)]
+		taxdf <- plyr::ldply(tax2, function(x){
+			ret <- rep(NA, 8);
+			names(ret) <- c('kingdom', 'phylum', 
+				'subclass', 'order','superfamily',
+				'family','genus', 'subgenus')
+			ret[na.omit(match(x$rank, names(ret)))] <- x$name[!is.na(match(x$rank, names(ret)))]
+			return(ret)
+			})
+			taxdf$subclass <- NULL
+			taxdf$subgenus <- NULL
+    return(list(HPedge = edge, HostTaxon = taxdf))
   }
   return(edge)
 }

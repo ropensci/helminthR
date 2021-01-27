@@ -4,11 +4,13 @@
 \name{locations}
 \alias{locations}
 \title{Table of geographic location names, and associated coordinates}
-\format{\describe{
+\format{
+\describe{
    \item{Location}{Name of geographic location}
    \item{Latitude}{Latitude of location centroid}
    \item{Longitude}{Longitude of location centroid}
- }}
+ }
+}
 \usage{
 data(locations)
 }

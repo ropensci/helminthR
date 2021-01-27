@@ -4,9 +4,15 @@
 \alias{findLocation}
 \title{Find host-parasite interactions for a given location}
 \usage{
-findLocation(location = NULL, group = NULL, citation = FALSE,
-  hostState = NULL, speciesOnly = FALSE, validateHosts = FALSE,
-  removeDuplicates = FALSE)
+findLocation(
+  location = NULL,
+  group = NULL,
+  citation = FALSE,
+  hostState = NULL,
+  speciesOnly = FALSE,
+  validateHosts = FALSE,
+  removeDuplicates = FALSE
+)
 }
 \arguments{
 \item{location}{Location of host-parasite interaction.}
@@ -37,11 +43,12 @@ Three (or five) column data.frame containing host species,
 	to an occurrence of a parasite species on a host species.
 }
 \description{
-Find host-parasite interactions for a given location
+Given a location (available from \code{data{locations}}) this function 
+returns all host-parasite associations in that location.
 }
 \details{
 \code{hostState} can take values 1-6 corresponding to if the recorded 
-	host was found 
+host was found 
 \itemize{ 
 	\item (1) "In the wild"
 	\item (2) "Zoo captivity" 
