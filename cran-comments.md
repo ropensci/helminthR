@@ -1,6 +1,6 @@
 ## Test environments
 
-* ubuntu 18.04, R 3.5.2 (local machine)
+* ubuntu 20.04, R 4.0.3 (local machine)
 * ubuntu 14.04, R 3.5.0 (travis ci)
 * win-builder (devel and release)
 
@@ -21,8 +21,7 @@ There are no reverse dependencies
 I have read and agree to the the CRAN
 policies at https://cran.r-project.org/web/packages/policies.html
 
-This is an update to the package to remove the ggmap dependency and provide a small bugfix to the cleanData function for removing species identified only to genus. I have also removed the ` symbols in place of ' symbols or code text in the documentation.
-
+This is an update to the package needed due to a change in a taxonomy API that was being queried in the cleanData function. 
 
 Thanks!
 Tad Dallas
