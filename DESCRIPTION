@@ -1,7 +1,7 @@
 Package: helminthR
 Type: Package
 Title: Access London Natural History Museum Host-Helminth Record Database
-Version: 1.0.7
+Version: 1.0.8
 Author: Tad Dallas
 Imports:
     xml2,
@@ -13,7 +13,8 @@ Imports:
     knitr,
     taxize
 Suggests:
-    testthat
+    testthat,
+    rmarkdown
 VignetteBuilder: knitr
 Maintainer: Tad Dallas <tad.a.dallas@gmail.com>
 URL: https://docs.ropensci.org/helminthR, https://github.com/rOpenSci/helminthR

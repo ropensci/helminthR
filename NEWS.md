@@ -1,3 +1,9 @@
+helminthR 1.0.8
+==============
+
+Small fix to the cleanData function to now use taxize to get host species taxonomic data.
+
+
 helminthR 1.0.7
 ==============
 
