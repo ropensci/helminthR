@@ -13,6 +13,7 @@
 #' @importFrom utils tail globalVariables
 #' @importFrom rvest html_nodes html_text html_attr
 #' @importFrom magrittr %>%
+#' @importFrom stats na.omit
 #' @importFrom plyr ldply
 #' @importFrom xml2 read_html read_xml xml_attr xml_text xml_children xml_find_all
 #' @importFrom httr content GET stop_for_status

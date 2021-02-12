@@ -1,11 +1,10 @@
 #' Find host-parasite interactions for a given location
 #'
-#' Given a location (available from \code{data{locations}) this function 
-#'		returns all host-parasite associations in that location.
-#'
+#' Given a location (available from \code{data{locations}}) this function 
+#' returns all host-parasite associations in that location.
 #'
 #' \code{hostState} can take values 1-6 corresponding to if the recorded 
-#'		host was found 
+#' host was found 
 #' \itemize{ 
 #'		\item (1) "In the wild"
 #'		\item (2) "Zoo captivity" 

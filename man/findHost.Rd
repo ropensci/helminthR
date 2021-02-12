@@ -4,9 +4,17 @@
 \alias{findHost}
 \title{Find parasite occurrence data for given host.}
 \usage{
-findHost(genus = NULL, species = NULL, location = NULL,
-  citation = FALSE, hostState = NULL, speciesOnly = FALSE,
-  validateHosts = FALSE, parGroup = NULL, removeDuplicates = FALSE)
+findHost(
+  genus = NULL,
+  species = NULL,
+  location = NULL,
+  citation = FALSE,
+  hostState = NULL,
+  speciesOnly = FALSE,
+  validateHosts = FALSE,
+  parGroup = NULL,
+  removeDuplicates = FALSE
+)
 }
 \arguments{
 \item{genus}{Host genus}
@@ -56,7 +64,7 @@ Use \code{data(locations)} for a list of possible locations.
 	\item (6) "Accidental infestation"
  }
 
-A value of NULL should be entered if you would like to include 
+ A value of NULL should be entered if you would like to include 
 	all hostStates.
 
 \code{parGroup} can be specified as "Acanthocephalans", "Cestodes",
