@@ -17,13 +17,13 @@ Suggests:
     rmarkdown
 VignetteBuilder: knitr
 Maintainer: Tad Dallas <tad.a.dallas@gmail.com>
-URL: https://docs.ropensci.org/helminthR, https://github.com/rOpenSci/helminthR
-BugReports: https://github.com/rOpenSci/helminthR/issues
+URL: https://docs.ropensci.org/helminthR/, https://github.com/rOpenSci/helminthR/
+BugReports: https://github.com/rOpenSci/helminthR/issues/
 Description: Access to large host-parasite data is often hampered by the 
   availability of data and difficulty in obtaining it in a programmatic way
   to encourage analyses. 'helminthR' provides a programmatic interface to the 
   London Natural History Museum's host-parasite database, one of the largest 
-  host-parasite databases existing currently <http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/>. The package allows the user
+  host-parasite databases existing currently <https://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/>. The package allows the user
   to query by host species, parasite species, and geographic location.
 License: GPL-3
 LazyData: yes
