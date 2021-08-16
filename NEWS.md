@@ -1,7 +1,7 @@
 helminthR 1.0.9
 ==============
 
-Fixing some NOTES and WARNINGS in the vignette creation process for the package. 
+Fixing some NOTES and WARNINGS in the vignette creation process for the package. Switched from Travis CI to GitHub Actions for CI on GitHub. 
 
 
 
