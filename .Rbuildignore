@@ -1,7 +1,6 @@
 ^CRAN-RELEASE$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-.travis.yml
 README.Rmd
 LICENSE
 cran-comments.md
@@ -10,3 +9,4 @@ Makefile
 appveyor.yml
 ^doc$
 ^Meta$
+^\.github$
