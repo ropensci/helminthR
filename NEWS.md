@@ -1,3 +1,10 @@
+helminthR 1.0.9
+==============
+
+Fixing some NOTES and WARNINGS in the vignette creation process for the package. 
+
+
+
 helminthR 1.0.8
 ==============
 
