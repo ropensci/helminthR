@@ -22,7 +22,7 @@ There are no reverse dependencies
 I have read and agree to the the CRAN
 policies at https://cran.r-project.org/web/packages/policies.html
 
-This is an update to handle some NOTES and a few WARNINGS that were being thrown by certain operating systems when compiling the vignette. 
+This is an update to handle cases where web resource is unavailable, such that the function fails gracefully. Thanks to Prof Brian Ripley for reminding me of CRAN policy. 
 
 Thanks!
 Tad Dallas

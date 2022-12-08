@@ -1,3 +1,9 @@
+helminthR 1.0.10
+==============
+
+Tiny bug fix making sure to error out gracefully if web resource is unavailable. Mainly affected vignette, but additional code has been added to `findParasite`, `findHost`, and `findLocation` for error handling.
+
+
 helminthR 1.0.9
 ==============
 
