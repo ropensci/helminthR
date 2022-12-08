@@ -1,7 +1,7 @@
 Package: helminthR
 Type: Package
 Title: Access London Natural History Museum Host-Helminth Record Database
-Version: 1.0.9
+Version: 1.0.10
 Authors@R: 
     person("Tad Dallas", role = c("aut","cre"), email = "tad.a.dallas@gmail.com")
 Imports:
