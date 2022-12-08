@@ -119,8 +119,9 @@ hosts <- c('Gorilla gorilla', 'Peromyscus leucopus')
 plyr::ldply(hosts, 
 	function(x){
 		findHost(unlist(strsplit(x, ' '))[1], 
-			unlist(strsplit(x,' '))[2])})
-	}
+			unlist(strsplit(x,' '))[2])
+    }
+)
 
 ```
 
@@ -130,14 +131,14 @@ plyr::ldply(hosts,
 
 Given a helminth parasite genus (and optionally species, and location), this function returns a list of host-parasite records for that parasite. In the example below, I query the database for occurrences of the genus _Strongyloides_.
 
-```{r eval=TRUE}
+```{r eval=FALSE}
 
 strongHosts <- findParasite(genus='Strongyloides')
 dim(strongHosts)
 
 ```
 
-```{r}
+```{r eval=FALSE}
 
 head(strongHosts)
 

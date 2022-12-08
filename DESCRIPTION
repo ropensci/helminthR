@@ -2,7 +2,8 @@ Package: helminthR
 Type: Package
 Title: Access London Natural History Museum Host-Helminth Record Database
 Version: 1.0.9
-Author: Tad Dallas
+Authors@R: 
+    person("Tad Dallas", role = c("aut","cre"), email = "tad.a.dallas@gmail.com")
 Imports:
     xml2,
     rvest,
@@ -16,7 +17,6 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-Maintainer: Tad Dallas <tad.a.dallas@gmail.com>
 URL: https://docs.ropensci.org/helminthR/, https://github.com/rOpenSci/helminthR/
 BugReports: https://github.com/rOpenSci/helminthR/issues/
 Description: Access to large host-parasite data is often hampered by the 

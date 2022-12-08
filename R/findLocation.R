@@ -85,7 +85,9 @@ findLocation <- function(location = NULL, group = NULL, citation = FALSE,
     showrefs='on',
     groupby='parasite',
     search='Search')
-  hp <- GET(url, query = args)
+
+  hp <- tryCatch(GET(url, query = args), error = function(x){
+      stop("Error: unable to reach NHM webservice. Please try again.")})
   stop_for_status(hp) 
 	
 	if(hp$status_code != 200){

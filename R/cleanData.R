@@ -1,7 +1,7 @@
 #' Clean helminth parasite occurrence data
 #'
 #' Given a host-parasite edgelist, this function can validate species names,
-#' provide further taxonomic information (thanks to \code{taxize}), 
+#' provide further taxonomic information (thanks to the \code{'taxize'} package), 
 #' and remove records only to genus level.
 #'
 #' Use \code{data(locations)} for a list of possible locations.
