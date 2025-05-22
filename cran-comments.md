@@ -1,9 +1,10 @@
 ## Test environments
 
-* ubuntu 22.04-release
-* ubuntu 24.04-devel
-* windows-latest
-* macOS-latest
+- {os: macos-latest,   r: 'release'}
+- {os: windows-latest, r: 'release'}
+- {os: windows-latest, r: '4.1'}
+- {os: ubuntu-latest,  r: 'devel', http-user-agent: 'release'}
+- {os: ubuntu-latest,  r: 'release'}
 
 
 ## R CMD check results
@@ -22,7 +23,6 @@ There are no reverse dependencies
 I have read and agree to the the CRAN
 policies at https://cran.r-project.org/web/packages/policies.html
 
-This is an update to handle cases where web resource is unavailable, such that the function fails gracefully. Thanks to Prof Brian Ripley for reminding me of CRAN policy. 
 
 Thanks!
 Tad Dallas
