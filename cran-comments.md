@@ -1,7 +1,7 @@
 ## Test environments
 
-* ubuntu 20.04-release
-* ubuntu 20.04-devel
+* ubuntu 22.04-release
+* ubuntu 24.04-devel
 * windows-latest
 * macOS-latest
 
