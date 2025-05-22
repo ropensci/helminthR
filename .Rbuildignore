@@ -2,6 +2,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 README.Rmd
+README.md
 LICENSE
 cran-comments.md
 ^CONDUCT\.md$
@@ -10,3 +11,4 @@ appveyor.yml
 ^doc$
 ^Meta$
 ^\.github$
+^CRAN-SUBMISSION$

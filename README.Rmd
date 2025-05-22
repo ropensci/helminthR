@@ -1,8 +1,7 @@
 helminthR
 =======
 
-  [![R build status](https://github.com/ropensci/helminthR/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/helminthR/actions)
-[![Windows Build Status](https://ci.appveyor.com/api/projects/status/rmq9euldm5gy9qup?svg=true)](https://ci.appveyor.com/project/taddallas/helminthr)
+[![R build status](https://github.com/ropensci/helminthR/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/helminthR/actions)
 [![codecov.io](https://codecov.io/github/ropensci/helminthR/coverage.svg?branch=master)](https://codecov.io/github/ropensci/helminthR?branch=master)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/helminthR)](https://github.com/metacran/cranlogs.app)
 
@@ -10,6 +9,8 @@ helminthR
 > Programmatically access the London Natural History Museum's [helminth database](http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/index.html).
 
 See software note in _Ecography_ ([available here](http://onlinelibrary.wiley.com/doi/10.1111/ecog.02131/full))
+
+
 
 
 ### Installation

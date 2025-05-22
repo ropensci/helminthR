@@ -1,3 +1,11 @@
+helminthR 1.0.11
+==============
+
+The package was archived due to a dependency on taxize which is now fixed. The package still depends on taxize, but taxize is back on CRAN and the build checks all pass. 
+
+
+
+
 helminthR 1.0.10
 ==============
 
