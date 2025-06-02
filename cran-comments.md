@@ -7,10 +7,17 @@
 - {os: ubuntu-latest,  r: 'release'}
 
 
+All the examples are wrapped in \donttest{} calls as these calls access a web resource and sometimes this takes longer than the 5 second threshold. 
+
+
+
+
 ## R CMD check results
 
 R CMD check results
 0 errors | 0 warnings | 0 notes
+
+
 
 
 ## Reverse dependencies
