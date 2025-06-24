@@ -1,15 +1,12 @@
 Package: helminthR
 Type: Package
 Title: Access London Natural History Museum Host-Helminth Record Database
-Version: 1.0.11
+Version: 1.1.0
 Authors@R: 
     person("Tad Dallas", role = c("aut","cre"), email = "tad.a.dallas@gmail.com")
+Depends:
+    R (>= 3.5.0)
 Imports:
-    xml2,
-    rvest,
-    httr,
-    magrittr,
-    plyr,
     utils,
     taxize
 Suggests:
@@ -19,12 +16,7 @@ Suggests:
 VignetteBuilder: knitr
 URL: https://docs.ropensci.org/helminthR/, https://github.com/rOpenSci/helminthR/
 BugReports: https://github.com/rOpenSci/helminthR/issues/
-Description: Access to large host-parasite data is often hampered by the 
-  availability of data and difficulty in obtaining it in a programmatic way
-  to encourage analyses. 'helminthR' provides a programmatic interface to the 
-  London Natural History Museum's host-parasite database, one of the largest 
-  host-parasite databases existing currently <https://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/>. The package allows the user
-  to query by host species, parasite species, and geographic location.
+Description: Access to large host-parasite data is often hampered by the availability of data and difficulty in obtaining it in a programmatic way to encourage analyses. 'helminthR' provides accesss to the London Natural History Museum's host-parasite database, one of the largest host-parasite databases existing currently.
 License: GPL-3
 LazyData: yes
 Encoding: UTF-8

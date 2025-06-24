@@ -4,11 +4,10 @@
 \alias{cleanData}
 \title{Clean helminth parasite occurrence data}
 \usage{
-cleanData(edge, speciesOnly = FALSE, validateHosts = FALSE)
+cleanData(data, speciesOnly = FALSE, validateHosts = FALSE)
 }
 \arguments{
-\item{edge}{Host-parasite edgelist obtained from \code{\link{findLocation}},
-\code{\link{findHost}}, or \code{\link{findParasite}}}
+\item{data}{helminth interaction data}
 
 \item{speciesOnly}{boolean flag to remove host and parasite species
 where data are only available at genus level (default = FALSE)}
@@ -18,12 +17,15 @@ against Catalogue of Life information and output taxonomic
 information (default = FALSE)}
 }
 \value{
-cleanEdge Host-parasite edgelist, but cleaned
+data.frame with cleaned data
 }
 \description{
-Given a host-parasite edgelist, this function can validate species names,
-provide further taxonomic information (thanks to the \code{'taxize'} package), 
-and remove records only to genus level.
+Given the data or a subset of the helminth interaction data 
+(see `loadData()`), perform various cleaning functions on the
+ data, including validation of species names, run taxize on 
+hosts (again, as there are already host and parasite taxonomic
+variables as part of this data.frame , and remove 
+records only to genus level.
 }
 \details{
 Use \code{data(locations)} for a list of possible locations.

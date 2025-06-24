@@ -80,7 +80,6 @@ install.packages("helminthR")
 ```
 
 
-
 ## Package functionality
 
 The package allows for the acquisition of host-helminth interaction records based on host name (genus or species), parasite name (genus, species, or group), and/or location (accepted region name as provided in `data(locations)`. Parasite groups include "Acanthocephalans", "Cestodes", "Monogeans", "Nematodes", "Trematodes", or "Turbs" (short for Turbellarians). The user can further define host species as occuring 
@@ -95,74 +94,44 @@ The package allows for the acquisition of host-helminth interaction records base
 
 by inputting the corresponding number above in the `hostState` argument. 
 
-The package itself has three main functions; `findHost`, `findParasite`, and `findLocation`. 
+The package itself has two base functions; `loadData` and `cleanData`
 
 
 
-### Find all helminth parasites of a given host species
+### `loadData()`
 
-Given a host genus and (optionally) species and location, this function returns all host-parasite associations of a given host species. The example below determines all parasite records for helminth infections of _Gorilla gorilla_. We also use the `citation` argument here to obtain information on the citations which the host-helminth occurrences are based on. 
+This function loads the data. The data were previously served by the London Natural History Museum, so this package programmatically accessed them via API queries. The data have been archived, and this package ships with a zipped copy of the current release of the data.
+
 
 ```{r eval=FALSE}
-
-gorillaParasites <- findHost(genus='Gorilla', species='gorilla', 
-	hostState=1, speciesOnly=TRUE, citation=TRUE)
-
+data <- loadData()
 ```
 
+### `cleanData()`
 
-The above function will query the database for helminth parasites of _Gorilla gorilla_ that were captured in the wild, and will remove helminth parasites not identified to species. If the user wishes to query multiple host species at the same time, the user can do the following 
+There are numerous records that the end user may want to remove before analyzing the data. For instance, `(Deer)` is a valid host species listed, as is `(duck)`. We can clean the data to remove these records and others not identified to species-level, as well as use `taxize` to access taxonomic data on hosts using the `cleanData()` function. 
 
 ```{r eval=FALSE}
-
-hosts <- c('Gorilla gorilla', 'Peromyscus leucopus')
-plyr::ldply(hosts, 
-	function(x){
-		findHost(unlist(strsplit(x, ' '))[1], 
-			unlist(strsplit(x,' '))[2])
-    }
-)
-
+data2 <- cleanData(data)
 ```
 
 
 
-### Find all hosts of a given helminth parasite
-
-Given a helminth parasite genus (and optionally species, and location), this function returns a list of host-parasite records for that parasite. In the example below, I query the database for occurrences of the genus _Strongyloides_.
-
-```{r eval=FALSE}
-
-strongHosts <- findParasite(genus='Strongyloides')
-dim(strongHosts)
-
-```
-
-```{r eval=FALSE}
-
-head(strongHosts)
-
-```
 
 
+### `data(locations)` 
 
-### `data(locations)` and `findLocation()`
-
-A data file containing all the location names that can be queried, along with putative latitude and longitude coordinates for the centroid of each location can be found in `data(locations)`. Note that this will replace any object in the global environment named `locations`. These names can be given to the `findLocation()` function, which finds all host-parasite associations that have occurred in the given location. Below, I look at host-parasite associations recorded in France.
+A data file containing all the location names that can be queried, along with putative latitude and longitude coordinates for the centroid of each location can be found in `data(locations)`. Note that this will replace any object in the global environment named `locations`. These names can be used to subset the existing data product (see `loadData()`). Below, I look at host-parasite associations recorded in France.
 
 
 ```{r eval=FALSE}
 
-montanaOcc <- findLocation(location='Montana')
-dim(montanaOcc)
-
+france <- data[which(data$country == 'France'), ]
+dim(france)
+head(france)
 ```
 
-```{r eval=FALSE}
 
-head(montanaOcc)
-
-```
 
 
 ### plotting host-helminth networks
@@ -171,7 +140,10 @@ Below, I provide an example of code for plotting the bipartite network of host-h
 
 ```{r eval=FALSE}
 
-g <- igraph::graph.incidence(table(montanaOcc[,1:2]))
+g <- igraph::graph_from_biadjacency_matrix(table(
+  france$hostScientificName, 
+  france$parasiteScientificName)
+)
 igraph::V(g)$name <- NA
 igraph::E(g)$color <- 'black'
 
@@ -179,7 +151,7 @@ plot(g,
 	vertex.color=c("black","dodgerblue")[igraph::V(g)$type+1],
 	vertex.size=5
 )
- 
+
 ```
 
 

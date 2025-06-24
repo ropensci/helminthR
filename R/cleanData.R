@@ -1,51 +1,70 @@
 #' Clean helminth parasite occurrence data
 #'
-#' Given a host-parasite edgelist, this function can validate species names,
-#' provide further taxonomic information (thanks to the \code{'taxize'} package), 
-#' and remove records only to genus level.
+#' Given the data or a subset of the helminth interaction data 
+#' (see `loadData()`), perform various cleaning functions on the
+#'  data, including validation of species names, run taxize on 
+#' hosts (again, as there are already host and parasite taxonomic
+#' variables as part of this data.frame , and remove 
+#' records only to genus level.
 #'
 #' Use \code{data(locations)} for a list of possible locations.
 #'
-#' @param edge Host-parasite edgelist obtained from \code{\link{findLocation}},
-#'        \code{\link{findHost}}, or \code{\link{findParasite}}
+#' @param data helminth interaction data
 #' @param speciesOnly boolean flag to remove host and parasite species
 #'        where data are only available at genus level (default = FALSE)
 #' @param validateHosts boolean flag to check host species names
 #'        against Catalogue of Life information and output taxonomic
 #'        information (default = FALSE)
 #'
-#' @return cleanEdge Host-parasite edgelist, but cleaned
+#' @return data.frame with cleaned data
 #' @export
 #' @author Tad Dallas
 #'
 
-cleanData <- function (edge, speciesOnly = FALSE, validateHosts = FALSE){
+cleanData <- function (data, speciesOnly = FALSE, validateHosts = FALSE){
   if (speciesOnly) {
-    if (length(grep("sp\\.", edge$Host)) > 0) {
-      edge <- edge[-grep(" sp\\.", edge$Host), ]
+    ind <- grep(" sp\\.", data$hostScientificName)
+    if (length(ind) > 0) {
+      data <- data[!ind,]
     }
-    if (length(grep("sp\\.", edge$Parasite)) > 0) {
-      edge <- edge[-grep(" sp\\.", edge$Parasite), ]
+    ind <- grep(" sp\\.", data$parasiteScientificName)
+    if (length(ind) > 0) {
+      data <- data[!ind,]
     }
-    if (length(grep("spp\\.", edge$Host)) > 0) {
-      edge <- edge[-grep(" spp\\.", edge$Host), ]
+    ind <- grep(" spp\\.", data$hostScientificName)
+    if (length(ind) > 0) {
+      data <- data[!ind,]
     }
-    if (length(grep("spp\\.", edge$Parasite)) > 0) {
-      edge <- edge[-grep(" spp\\.", edge$Parasite), ]
+    ind <- grep(" spp\\.", data$parasiteScientificName)
+    if (length(ind) > 0) {
+      data <- data[!ind,]
     }
-
-    if (length(grep(".*\\((.*)\\).*", edge$Host)) > 0) {
-      edge <- edge[-grep(".*\\((.*)\\).*", edge$Host), ]
+    ind <- grep(".*\\((.*)\\).*", data$hostScientificName)
+    if (length(ind) > 0) {
+      data <- data[!ind,]
     }
-    if (length(grep(".*\\((.*)\\).*", edge$Parasite)) > 0) {
-      edge <- edge[-grep(".*\\((.*)\\).*", edge$Parasite), ]
+    ind <- grep(".*\\((.*)\\).*", data$parasiteScientificName)
+    if (length(ind) > 0) {
+      data <- data[!ind,]
+    }
+    ind <- grep(".*\\[", data$hostScientificName)
+    if (length(ind) > 0) {
+      data <- data[!ind,]
+    }
+    ind <- grep(".*\\[", data$parasiteScientificName)
+    if (length(ind) > 0) {
+      data <- data[!ind,]
+    }
+    ind <- grep(' NA', data$hostScientificName)
+    if(length(ind)>0){
+      data <- data[!ind,]
     }
   }
 
   if (validateHosts) {
-		tax <- taxize::classification(edge$Host, db='ncbi')
+		tax <- taxize::classification(data$hostScientificName, db='ncbi')
 		tax2 <- tax[!is.na(tax)]
-		taxdf <- plyr::ldply(tax2, function(x){
+		taxdf <- lapply(tax2, function(x){
 			ret <- rep(NA, 8);
 			names(ret) <- c('kingdom', 'phylum', 
 				'subclass', 'order','superfamily',
@@ -53,9 +72,11 @@ cleanData <- function (edge, speciesOnly = FALSE, validateHosts = FALSE){
 			ret[na.omit(match(x$rank, names(ret)))] <- x$name[!is.na(match(x$rank, names(ret)))]
 			return(ret)
 			})
+      taxdf <- do.call(rbind, taxdf)
+      taxdf <- as.data.frame(taxdf)
 			taxdf$subclass <- NULL
 			taxdf$subgenus <- NULL
-    return(list(HPedge = edge, HostTaxon = taxdf))
+    return(list(HPedge = data, HostTaxon = taxdf))
   }
-  return(edge)
+  return(data)
 }

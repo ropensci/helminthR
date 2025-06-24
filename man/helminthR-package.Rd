@@ -6,16 +6,13 @@
 \alias{helminthR}
 \title{Access London Natural History Museum host-helminth record database}
 \description{
-'helminthR': A programmatic interface to the London 
+'helminthR': data from the London 
   Natural History Museum's host-parasite database.
-
-The package currently allows you to query by host species, parasite species, 
-and geographic location. No information is provided on parasite prevalence or intensity.
 }
 \references{
 Gibson, D. I., Bray, R. A., & Harris, E. A. (Compilers) (2005).
 Host-Parasite Database of the Natural History Museum, London. 
-<http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/>
+http://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/
 }
 \seealso{
 Useful links:

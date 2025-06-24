@@ -1,87 +1,56 @@
-helminthR
-=======
+# helminthR
 
-[![R build status](https://github.com/ropensci/helminthR/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/helminthR/actions)
-[![Windows Build Status](https://ci.appveyor.com/api/projects/status/rmq9euldm5gy9qup?svg=true)](https://ci.appveyor.com/project/taddallas/helminthr)
+[![R build
+status](https://github.com/ropensci/helminthR/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/helminthR/actions)
+
 [![codecov.io](https://codecov.io/github/ropensci/helminthR/coverage.svg?branch=master)](https://codecov.io/github/ropensci/helminthR?branch=master)
-[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/helminthR)](https://github.com/r-hub/cranlogs.app)
 
+[![rstudio mirror
+downloads](http://cranlogs.r-pkg.org/badges/helminthR)](https://github.com/metacran/cranlogs.app)
 
-> Programmatically access the London Natural History Museum's [helminth database](https://www.nhm.ac.uk/research-curation/scientific-resources/taxonomy-systematics/host-parasites/index.html).
+> Provides access the London Natural History Museum's helminth database.
+> The data are now archived by the London Natural History Museum, but we
+> are still curating the data, adding records and working towards
+> georeferencing existing data at a finer scale than the current
+> geopolitical level.
 
-See software note in _Ecography_ ([available here](https://onlinelibrary.wiley.com/doi/full/10.1111/ecog.02131))
-
+This package has changed a good deal as a result of the data being
+archived. See the original software note in *Ecography* ([available
+here](http://onlinelibrary.wiley.com/doi/10.1111/ecog.02131/full)) for
+information on how the package worked in the past, or see the vignette
+for how it works now.
 
 ### Installation
 
 From GitHub
 
-
-```r
-# install.packages("devtools")
-devtools::install_github("rOpenSci/helminthR")
-library("helminthR")
 ```
+    # install.packages("devtools")
+    devtools::install_github("rOpenSci/helminthR")
+    library("helminthR")
+```
+
 
 From CRAN
 
-
-```r
-install.packages("helminthR")
 ```
-
-
-
-### Main functions
-
-#### `findHost()`
-
-Given a host genus and (optionally) species and location, this function returns all host-parasite associations of a given host species. The example below determines all parasite records for helminth infections of _Gorilla gorilla_.
-
-
-```r
-gorillaParasites <- findHost('Gorilla', 'gorilla')
-head(gorillaParasites)
+    install.packages("helminthR")
 ```
-
-#### `findParasite()`
-
-Given a helminth parasite genus (and optionally species, and location), this function returns a list of host-parasite records for that parasite. In the example below, I query the database for occurrences of the genus _Strongyloides_.
-
-
-```r
-strongHosts <- findParasite(genus='Strongyloides')
-str(strongHosts)
-```
-
-
-
-#### `listLocations()` and `findLocation()`
-
-List all location names (`listLocations()`). These names can be given to the `findLocation()` function, which finds all host-parasite associations that have occurred in the given location. Below, I look at host-parasite associations recorded in France.
-
-
-
-```r
-FrenchHostPars <- findLocation(location='France')
-str(FrenchHostPars)
-```
-
-
 
 
 ### Contribute!
 
-Feel free to fork it and contribute some functionality.  
-
-
+Feel free to fork it and contribute some functionality.
 
 ## Meta
 
-* Please [report any issues or bugs](https://github.com/ropensci/helminthR/issues).
-* License: GPL-3
-* Get citation information for `helminthR` in R doing `citation(package = 'helminthR')`
-* Please note that this project is released with a [Contributor Code of Conduct](https://www.contributor-covenant.org/).
-By participating in this project you agree to abide by its terms.
+-   Please [report any issues or
+    bugs](https://github.com/ropensci/helminthR/issues).
+-   License: GPL-3
+-   Get citation information for `helminthR` in R doing
+    `citation(package = 'helminthR')`
+-   Please note that this project is released with a [Contributor Code
+    of Conduct](CONDUCT.md). By participating in this project you agree
+    to abide by its terms.
 
-[![ropensci_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
+[![ropensci\_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
