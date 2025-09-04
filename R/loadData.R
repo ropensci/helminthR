@@ -13,10 +13,11 @@
 
 loadData <- function(outdir='.'){
   if(!file.exists('helminths.csv')){
-    unzip('inst/extdata/helminths.zip', files = NULL, 
-        list = FALSE, overwrite = TRUE,
-        junkpaths = FALSE, exdir = outdir, unzip = "internal",
-        setTimes = FALSE)
+    filePath <- system.file("extdata", "helminths.zip", 
+      package = "helminthR")
+    unzip(filePath, 
+        junkpaths = FALSE, exdir = outdir, 
+        unzip = "internal", setTimes = FALSE)
   }
   helminth <- read.csv('helminths.csv')
   return(helminth)

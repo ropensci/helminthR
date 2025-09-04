@@ -31,11 +31,16 @@ From GitHub
 ```
 
 
-From CRAN
+### Load the data 
 
 ```
-    install.packages("helminthR")
+dat <- loadData()
+
 ```
+
+
+
+
 
 
 ### Contribute!
